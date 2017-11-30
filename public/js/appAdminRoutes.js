@@ -9,6 +9,14 @@ angular.module('appAdminRoutes', []).config(['$routeProvider', '$locationProvide
             controller: 'AdminLoginController'
         })
 
+    .when('/sakai/resource', {
+            templateUrl: 'views/partials/admin/resource.html',
+            controller: 'AdminResourcesController'
+        })
+    .when('/sakai/gradebook', {
+            templateUrl: 'views/partials/admin/gradebook.html',
+            controller: 'AdminGradeBookController'
+        })
     .when('/404', {
             templateUrl: '/views/404.html',
             title: '404 - Không tìm thấy trang yêu cầu',

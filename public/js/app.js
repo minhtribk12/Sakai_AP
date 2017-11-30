@@ -1,4 +1,4 @@
-var app = angular.module('bklanguage', [
+var app = angular.module('none', [
     'ngRoute',
     'appRoutes',
     'appFilters',
@@ -40,4 +40,10 @@ angular.module('admin', [
     'AdminMainService',
 
     'adminLoginController',
+
+    'adminResourcesController',
+    'AdminResourcesService',
+
+    'adminGradeBookController',
+    'AdminGradeBookService'
 ]);

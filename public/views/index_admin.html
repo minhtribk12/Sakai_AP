@@ -1,124 +1,107 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset='utf8'>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="/">
-  <title>Admin Page</title>
-  <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../libs/ng-tags-input/ng-tags-input.css">
-  <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <meta charset='utf8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <title>Sakai</title>
+    <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../libs/ng-tags-input/ng-tags-input.css">
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
 </head>
+
 <body ng-app="admin" ng-controller="AdminMainController">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="home-logo-text" href="/admin">Admin</a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
-          <li class="avatar">
-            <a href="#">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="home-logo-text" href="#">Sakai</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                    <li class="avatar">
+                        <a href="#">
               {{full_name}}
               <img src="images/user_admin.png" class="user-img img-circle">
             </a>
-          </li>
-        </ul>
-      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style type="text/css">
+    .nav-sidebar li span {
+        padding-left: 10px;
+        text-transform: uppercase;
+        color: white;
+    }
+    </style>
+    <div class="row">
+        <div class="col-md-2 col-sm-3 sidebar" id="dashboard">
+            <div class="cover" style="overflow-y: scroll;" id="sidebar">
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <span>Courses</span>
+                        <li ng-repeat="course in courses">
+                            <a href="#pageSubmenu{{$index}}" class="head" data-toggle="collapse" aria-expanded="false">
+                              <i class="fa fa-book"></i>AP
+                            </a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu{{$index}}">
+                                <li><a href="/sakai/resource" ng-click="$root.cid = 123">Resource</a></li>
+                                <li><a href="/sakai/gradebook" ng-click="$root.cid = 123">GradeBook</a></li>
+                                <li><a href="#">Menu 3</a></li>
+                            </ul>
+                        </li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-view></div>
     </div>
-  </nav>
+    <script src="../libs/angular/angular.min.js"></script>
+    <script src="../libs/angular-route/angular-route.min.js"></script>
+    <script src="../libs/jquery/dist/jquery.min.js"></script>
+    <script src="../libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- SCRIPT -->
+    <script src="../libs/js-xlsx/dist/xlsx.core.min.js"></script>
+    <script src="../libs/js-xlsx/shim.js"></script>
+    <script src="../libs/js-xlsx/jszip.js"></script>
+    <script src="../libs/js-xlsx/xlsx.js"></script>
+    <!-- uncomment the next line here and in xlsxworker.js for ODS support -->
+    <script src="../libs/js-xlsx/dist/ods.js"></script>
+    <script src="../libs/ckeditor/ckeditor.js"></script>
+    <script src="../libs/angular-ckeditor/angular-ckeditor.js"></script>
+    <script src="../libs/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="../libs/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    <script src="../libs/angular-cookies/angular-cookies.js"></script>
+    <script src="../libs/ng-table/dist/ng-table.js"></script>
+    <script src="../libs/ng-table/dist/ng-table.min.js"></script>
+    <script src="../libs/angular-md5/angular-md5.js"></script>
+    <script src="../libs/ng-tags-input/ng-tags-input.js"></script>
+    <script src="../js/appAdminRoutes.js"></script>
+    <script src="../js/filters.js"></script>
+    <script src="../js/directives/appDirectives.js"></script>
+    <script src="../js/app.js"></script>
 
-  <style type="text/css">
-  .nav-sidebar li span{    
-    padding-left: 10px;
-    text-transform: uppercase;
-    color: white;
-  }
-  </style>
-  <div class="row">
-    <div class="col-md-2 col-sm-3 sidebar" id="dashboard">
-      <div class="cover" style="overflow-y: scroll;">
-        <ul class="nav nav-sidebar">
-          <li> 
-            <span>Cài đặt </span>
-              <li><a href="/admin/chinh-sua-trang-chu"><i class="fa fa-home"></i> Cài đặt trang chủ</a></li>
-              <li><a href="/admin/menu"><i class="fa fa-bars"></i> Chỉnh sửa menu</a></li>
-              <!-- <li><a href="/admin/danh-muc"><i class="fa fa-list"></i>Quản lý danh mục</a></li> -->
-              <li><a href="/admin/chinh-sua-blocks"><i class="fa fa-cog"></i> Cài đặt khác</a></li>
-          </li>
-          
-          <li>
-            <span>Bài viết</span>
-              <li><a href="/admin"><i class="fa fa-pencil-square"></i> Bài viết mới</a></li>
-              <li><a href="/admin/cho-xet-duyet"><i class="fa fa-cloud-upload"></i> Bài chờ duyệt</a></li>
-              <li ng-if="role == 1"><a href="/admin/bai-da-dang"><i class="fa fa-check-square"></i> Bài đã đăng</a></li>
-              <li><a href="/admin/bai-da-luu"><i class="fa fa-database"></i> Bài đã lưu</a></li>
-              <li><a href="/admin/bao-da-xoa"><i class="fa fa-recycle"></i> Bài đã xóa</a></li>
-          </li>
-          
-          <li>
-            <span>Điểm thi</span>
-            <li><a href="/admin/nhap-diem"><i class="fa fa-file-excel-o "></i> Nhập điểm</a></li>
-            <li><a href="/admin/quan-ly-diem"><i class="fa fa-table"></i> Quản lý điểm</a></li>
-          </li>
-          <li>
-            <span>Quản lý người dùng</span>
-              <li><a href="/admin/user"><i class="fa fa-user"></i>Danh sách người dùng</a></li>
-              <li><a href="/admin/danh-sach-dang-ly"><i class="fa fa-user"></i>Danh sách đăng ký</a></li>
-          </li>
-          
-          <!-- <li><a href="/admin/config"><i class="fa fa-cog"></i> Cài đặt</a></li> -->
-        </ul>
-      </div>
-    </div>
-    <div ng-view></div>
-  </div>
+    <script src="../js/controllers/admin/adminMainController.js"></script>
+    <script src="../js/services/admin/AdminMainService.js"></script>
+    <script src="../js/controllers/admin/adminLoginController.js"></script>
+    
+    <script src="../js/controllers/admin/adminResourcesController.js"></script>
+    <script src="../js/services/admin/AdminResourcesService.js"></script>
 
-  <script src="../libs/angular/angular.min.js"></script>
-  <script src="../libs/angular-route/angular-route.min.js"></script>
-  <script src="../libs/jquery/dist/jquery.min.js"></script>
-  <script src="../libs/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- SCRIPT -->
-  <script src="../libs/js-xlsx/dist/xlsx.core.min.js"></script>
-
-  <script src="../libs/js-xlsx/shim.js"></script>
-  <script src="../libs/js-xlsx/jszip.js"></script>
-  <script src="../libs/js-xlsx/xlsx.js"></script>
-  <!-- uncomment the next line here and in xlsxworker.js for ODS support -->
-  <script src="../libs/js-xlsx/dist/ods.js"></script>
-
-
-  <script src="../libs/ckeditor/ckeditor.js"></script>
-  <script src="../libs/angular-ckeditor/angular-ckeditor.js"></script>
-
-  <script src="../libs/ng-file-upload/ng-file-upload.min.js"></script>
-  <script src="../libs/ng-file-upload/ng-file-upload-shim.min.js"></script>
-
-  <script src="../libs/angular-cookies/angular-cookies.js"></script>
-
-  <script src="../libs/ng-table/dist/ng-table.js"></script>
-  <script src="../libs/ng-table/dist/ng-table.min.js"></script>
-
-  <script src="../libs/angular-md5/angular-md5.js"></script>
-
-  <script src="../libs/ng-tags-input/ng-tags-input.js"></script>
-
-  <script src="../js/appAdminRoutes.js"></script>
-  <script src="../js/filters.js"></script>
-  <script src="../js/directives/appDirectives.js"></script>
-  <script src="../js/app.js"></script>
-
-  <script src="../js/controllers/admin/adminMainController.js"></script>
-  <script src="../js/services/admin/AdminMainService.js"></script>
-
-  <script src="../js/controllers/admin/adminLoginController.js"></script>
+    <script src="../js/controllers/admin/adminGradeBookController.js"></script>
+    <script src="../js/services/admin/AdminGradeBookService.js"></script>
 </body>
+
 </html>

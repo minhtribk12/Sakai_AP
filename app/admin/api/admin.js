@@ -9,5 +9,39 @@ module.exports = function (app) {
         })
     });
 
+	// TODO
+    app.post('/api/admin/courses', function (req, res) {
+        var sql = '';
+        var params = [];
+        dao.query(sql, params, function(data){
+        	// dummy data
+            res.json([{a:1},{a:2},{a:3},{a:4}]);
+            // res.json(data);
+        })
+    });
     
+	// TODO
+    app.post('/api/admin/resource', function (req, res) {
+
+        var sql = '';
+        var params = [];
+        dao.query(sql, params, function(data){
+        	// dummy data
+            res.json([{a:1},{a:2},{a:3},{a:4}]);
+            // res.json(data);
+        })
+    });
+
+    // TODO
+    app.post('/api/admin/gradebook', function (req, res) {
+    	
+        var sql = '';
+        var params = [];
+        dao.query(sql, params, function(data){
+        	// dummy data
+            res.json([{a:1},{a:2},{a:3},{a:4}]);
+            // res.json(data);
+        })
+    });
+
 };
