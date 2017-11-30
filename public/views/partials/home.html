@@ -1,0 +1,458 @@
+<section id="menu-tab-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0">
+                <div class="vertical-menu" id="cssmenu">
+                    <div class="menu-title">
+                        <span>{{verticalMenu.name}}</span>
+                    </div>
+                    <script type="text/ng-template" id="menu_vertical_item_render.html">
+                        <ul class="vertical-sub-inner">
+                            <li ng-repeat="data in data.submenus" ng-include="'submenu_vertical_item_render.html'" ng-class="{'has-sub': data.submenus.length > 0}"></li>
+                        </ul>
+                        <a href='{{data.uri}}'><i class="fa fa-circle"></i>{{data.name}}</a>
+                    </script>
+
+                    <script type="text/ng-template" id="submenu_vertical_item_render.html">
+                        <ul class="vertical-sub-inner">
+                            <li ng-repeat="data in data.submenus" ng-include="'submenu_vertical_item_render.html'" ng-class="{'has-sub': data.submenus.length > 0}"></li>
+                        </ul>
+                        <a href='{{data.uri}}' ng-click="scrollTo('#post_detail')">{{data.name}}</a>
+                    </script>
+
+                    <ul>
+                        <li ng-repeat="data in verticalMenu.submenus" ng-include="'menu_vertical_item_render.html'" ng-class="{'has-sub': data.submenus.length > 0}"></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-9 col-md-9 col-sm-0 col-xs-0 desktop-scale-super-large" compile="mainMenu.submenus[menu].content">
+            </div>
+
+            <div class="col-lg-0 col-md-0 col-sm-12 col-xs-12 mobile-scale-super-small">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-sm-3 col-xs-3 mobile-tabs active" id="one" style="padding: 0;">
+                        <div class="img-tab co-so-vat-chat"></div>
+                        <div class="tabs-heading-des">Cơ sở vật chất</div>
+                        <div class="tabs-down-arrow"></div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 mobile-tabs" id="two" style="padding: 0;">
+                        <div class="img-tab doi-ngu-bac-si"></div>
+                        <div class="tabs-heading-des">Đội ngũ bác sĩ</div>
+                        <div class="tabs-down-arrow"></div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 mobile-tabs" id="three" style="padding: 0;">
+                        <div class="img-tab bang-gia-dich-vu"></div>
+                        <div class="tabs-heading-des">Bảng giá dịch vụ</div>
+                        <div class="tabs-down-arrow"></div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 mobile-tabs" id="four" style="padding: 0;">
+                        <div class="img-tab chinh-sach-bao-hanh"></div>
+                        <div class="tabs-heading-des">Chính sách bảo hành</div>
+                        <div class="tabs-down-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="row home-tabs-content show" id="one">
+                    <div class="col-sm-12 col-xs-12">
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Cơ Sở Vật Chất 1</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Cơ Sở Vật Chất 2</h3>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Cơ Sở Vật Chất 3</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Cơ Sở Vật Chất 4</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row home-tabs-content" id="two">
+                    <div class="col-sm-12 col-xs-12">
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/doi-ngu-bac-si.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Đội Ngũ Bác Sĩ 1</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/doi-ngu-bac-si.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Đội Ngũ Bác Sĩ 2</h3>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/doi-ngu-bac-si.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Đội Ngũ Bác Sĩ 3</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/doi-ngu-bac-si.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Đội Ngũ Bác Sĩ 4</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row home-tabs-content" id="three">
+                    <div class="col-sm-12 col-xs-12">
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Bảng Giá Dịch Vụ 1</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Bảng Giá Dịch Vụ 2</h3>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Bảng Giá Dịch Vụ 3</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Bảng Giá Dịch Vụ 4</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row home-tabs-content" id="four">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Chính Sách Bảo Hành 1</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Chính Sách Bảo Hành 2</h3>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Chính Sách Bảo Hành 3</h3>    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mobile-tabs-article" style="background: url('../img/temp/article_img.png') center no-repeat;">
+                                <div class="black-overlay">
+                                    <h3>Chính Sách Bảo Hành 4</h3>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+
+                <script type="text/javascript">
+                    $(function() {
+                        $('.mobile-tabs').on('click', function(){
+                            $('.mobile-tabs').removeClass('active');
+                            $(this).addClass('active');
+                            $('.home-tabs-content').removeClass('show');
+                            $('.home-tabs-content#'+$(this).attr('id')).addClass('show');
+                        });
+
+                        // $('.home-tabs-content .title').on('click', function(){
+                        //     // $('.img-container').removeClass('show-content');
+                        //     $(this).siblings("a").children(".img-container").toggleClass('show-content');
+                        // });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section desktop-scale grey-s-bg" style="background: url('{{homeConfig.p[0].bg_uri}}') center">
+    <div class="container">
+        <h1 class="section-title orange-text" ng-bind-html="homeConfig.p[0].title | to_trusted"></h1>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0" ng-repeat="item in homeConfig.p[0].items | limitTo: 4">
+                <div class="service">
+                    <div class="service-img">
+                        <a href="{{item.uri}}">
+                            <img src="{{item.image_uri}}">
+                            <div class="star_icon"></div>
+                        </a>
+                    </div>
+                    <div class="service-des">
+                        <a href="{{item.uri}}" ng-bind-html="item.title | to_trusted"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mobile-scale grey-s-bg" style="background: url('{{homeConfig.p[0].bg_uri}}') center">
+    <div class="container">
+        <div class="row">
+            <h3 class="m-section-title orange-text" ng-bind-html="homeConfig.p[0].title | to_trusted">
+            </h3>
+            <div class="col-sm-12 col-xs-12" ng-repeat="item in homeConfig.p[0].items | limitTo: 4">
+                <div class="service">
+                    <div class="service-img">
+                        <a href="{{item.uri}}">
+                            <img src="{{item.image_uri}}">
+                            <div class="star_icon"></div>
+                        </a>
+                    </div>
+                    <div class="service-des">
+                        <a href="{{item.uri}}" class="m-service-des" ng-bind-html="item.title | to_trusted"></a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section desktop-scale" style="background: url('{{homeConfig.p[1].bg_uri}}'); background-size: cover; padding: 0;">
+    <div class="orange-overplay">
+        <div class="container">
+            <h2 class="section-title white-text" ng-bind-html="homeConfig.p[1].title | to_trusted">
+            </h2>
+            <p class="section-intro white-text" ng-bind-html="homeConfig.p[1].description | to_trusted">
+            </p>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-0 col-xs-0" ng-repeat="item in homeConfig.p[1].items | limitTo: 3">
+                    <div class="square-service">
+                        <div class="top-box" style="background-image: url('{{item.image_uri}}'); background-position: center; background-repeat: no-repeat; background-size: 60%;"></div>
+                        <a href="{{item.uri}}" class="btn btn-app-flat"><i class="fa fa-arrow-right"></i> Xem chi tiết</a>
+                        <div class="square-service-des">
+                        	<span ng-bind-html="item.title | to_trusted"></span>
+                        </div>
+                    </div>
+                    <div ng-bind-html="item.description | to_trusted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mobile-scale" style="padding: 0;">
+    <div class="orange-overplay">
+        <div class="container">
+            <div class="row">
+                <h3 class="m-section-title white-text" ng-bind-html="homeConfig.p[1].title | to_trusted">
+                </h3>
+                <div class="col-sm-12 col-xs-12">
+                    <p class="m-section-intro white-text" ng-bind-html="homeConfig.p[1].description | to_trusted">
+                    </p>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 m-service-intro-list" ng-repeat="item in homeConfig.p[1].items | limitTo: 3">
+                <h3 class="m-section-title orange-text">
+                <span ng-bind-html="item.title | to_trusted"></span>
+                </h3>
+                <div class="orange-circle" style="background-image: url('{{item.image_uri}}'); background-position: center; background-repeat: no-repeat;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section desktop-scale" style="background: url('{{homeConfig.p[2].bg_uri}}'); background-size: cover; padding: 0;">
+    <div class="grey-overplay">
+        <div class="container">
+            <div class="row" style="padding: 55px 0 45px 0;">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <img src="{{homeConfig.p[2].image_uri}}" class="img-responsive" style="padding-left: 55px;">
+                    <div class="slogan" ng-bind-html="homeConfig.p[2].title | to_trusted">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="clip-container">
+                        <a href="#" data-toggle="modal" data-target="#video-show"><img src="../img/temp/clip.png" class="img-responsive"></a>
+                    </div>
+                    <div id="video-show" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header" id="review-header">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                                <h2 class="modal-title"><i class="fa fa-play-circle"></i>Niềng răng tại UP DENTAL</h2>
+                                            </div>
+                                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="stopVideo()"><span aria-hidden="true"><i class="fa fa-times" id="closeBtn"></i></span></button>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="clip-container" ng-bind-html="homeConfig.p[2].video_embed | to_trusted"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mobile-scale" style="background: url('../img/temp/bg/m_bg_home_2.jpg'); background-size: cover; padding: 0; background-position: center">
+    <div class="grey-overplay">
+        <div class="container">
+            <div class="row" style="padding: 0;">
+                <div class="col-sm-12 col-xs-12" style="padding: 0 10px;">
+                    <img src="{{homeConfig.p[2].image_uri}}" class="img-responsive" id="m-white-logo">
+                    <div class="m-slogan">
+                        <p class="m-slogan-sm"><span class="m-up-quote"></span>Niềng răng</p>
+                        <p class="m-slogan-lg" style="">CAO CẤP</p>
+                        <p class="m-slogan-lg" style="">GIÁ ƯU ĐÃI NHẤT</p>
+                        <p class="m-slogan-sm align-right">tại TP.HCM<span class="m-down-quote"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mobile-scale" style="padding: 0;">
+    <div class="container">
+        <div class="row" style="padding: 0;">
+            <div class="m-clip-container">
+                <a href="#" data-toggle="modal" data-target="#video-show"><img src="../img/temp/clip.png" class="img-responsive"></a>
+            </div>
+            <div id="video-show" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" id="review-header">
+                                <div class="row">
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <h2 class="modal-title"><i class="fa fa-play-circle"></i>Niềng răng tại UP DENTAL</h2>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="stopVideo()"><span aria-hidden="true"><i class="fa fa-times" id="closeBtn"></i></span></button>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-body" style="padding: 0;">
+                            <div class="m-clip-container" ng-bind-html="homeConfig.p[2].video_embed | to_trusted"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section desktop-scale">
+    <div class="container" style="padding: 0 8%;" id="customer-reply">
+        <h2 class="section-title orange-text" ng-bind-html="homeConfig.p[3].title | to_trusted">
+        </h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" ng-repeat="item in homeConfig.p[3].items | limitTo: 3">
+                <div class="card-box">
+                    <div class="title">
+                        <i class="fa fa-circle"></i><span ng-bind-html="item.title | to_trusted"></span>
+                    </div>
+                    <div class="content">
+                        <div class="description">{{item.description}}</div>
+                        <p class="author">(<span ng-bind-html="item.reviewer | to_trusted"></span>)</p>
+                    </div>
+                    <a href="{{item.uri}}" class="rm-btn">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" ng-repeat="item in homeConfig.p[3].items | limitTo: 3: 3">
+                <div class="card-box">
+                    <div class="title">
+                        <i class="fa fa-circle"></i><span ng-bind-html="item.title | to_trusted"></span>
+                    </div>
+                    <div class="content">
+                        <div class="description">{{item.description}}</div>
+                        <p class="author">(<span ng-bind-html="item.reviewer | to_trusted"></span>)</p>
+                    </div>
+                    <a href="{{item.uri}}" class="rm-btn">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section mobile-scale">
+    <div class="container">
+        <h2 class="section-title orange-text" ng-bind-html="homeConfig.p[3].title | to_trusted">
+        </h2>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" ng-repeat="item in homeConfig.p[3].items | limitTo: 6">
+                <div class="card-box">
+                    <div class="title">
+                        <i class="fa fa-circle"></i><span ng-bind-html="item.title | to_trusted"></span>
+                    </div>
+                    <div class="content">
+                        <span ng-bind-html="(item.description.substring(1, 200) + '...') | to_trusted"></span>
+                        <p class="author">(<span ng-bind-html="item.reviewer | to_trusted"></span>)</p>
+                    </div>
+                    <a href="{{item.uri}}" class="rm-btn">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
