@@ -4,6 +4,5 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
 
 	AdminGradeBook.getGradebook(user, $rootScope.cid).then(function(data){
 		$scope.gradebook = data;
-		alert($scope.gradebook)
 	})
 });

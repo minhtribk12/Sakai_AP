@@ -17,6 +17,18 @@ angular.module('appAdminRoutes', []).config(['$routeProvider', '$locationProvide
             templateUrl: 'views/partials/admin/gradebook.html',
             controller: 'AdminGradeBookController'
         })
+    .when('/sakai/assignment', {
+            templateUrl: 'views/partials/admin/assignment.html',
+            controller: 'AdminAssignmentController'
+        })
+    .when('/sakai/discussion', {
+            templateUrl: 'views/partials/admin/discussion.html',
+            controller: 'AdminDiscussionController'
+        })
+    .when('/sakai/announcement', {
+            templateUrl: 'views/partials/admin/announcement.html',
+            controller: 'AdminAnnouncementController'
+        })
     .when('/404', {
             templateUrl: '/views/404.html',
             title: '404 - Không tìm thấy trang yêu cầu',

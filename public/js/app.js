@@ -1,4 +1,4 @@
-var app = angular.module('none', [
+var app = angular.module('sakai', [
     'ngRoute',
     'appRoutes',
     'appFilters',
@@ -45,5 +45,14 @@ angular.module('admin', [
     'AdminResourcesService',
 
     'adminGradeBookController',
-    'AdminGradeBookService'
+    'AdminGradeBookService',
+
+    'adminAnnouncementController',
+    'AdminAnnouncementService',
+
+    'adminDiscussionController',
+    'AdminDiscussionService',
+    
+    'adminAssignmentController',
+    'AdminAssignmentService',
 ]);
