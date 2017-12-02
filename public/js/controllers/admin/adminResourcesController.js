@@ -2,12 +2,10 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
 
 	var cdata = $cookieStore.get('cdata') || {'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null};
 
-	AdminResources.getResources(cdata.cid, user).then(function(data){
-    $scope.editting = "";
-
-    AdminResources.getResources(cid, user).then(function(data) {
+	AdminResources.getResources(cid, user).then(function(data) {
 
         $scope.files = data;
+        $scope.editting = "";
     });
 
     $scope.editResource = function(id) {
@@ -57,7 +55,4 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
             }
         });
     }
-
-
-
 });

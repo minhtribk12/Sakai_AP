@@ -1,5 +1,57 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
     <div class="main-content">
-      This is Assainment
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Created by</th>
+                    <th>Created at</th>
+                    <th>Start date</th>
+                    <th>Due date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="assignment in assignments" ng-click="setAssignmentId(assignment.ASSIGNMENT_ID)">
+                    <td ng-bind="assignment.TITLE"></td>
+                    <td ng-bind="assignment.NAME"></td>
+                    <td ng-bind="assignment.DATE_CREATED"></td>
+                    <td ng-bind="assignment.START_DATE"></td>
+                    <td ng-bind="assignment.DUE_DATE"></td>
+                    <td><a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!---------- Announcement detail---------->
+        <div class="assignment-detail">
+            <ul>
+                <li>
+                    <span>Author:</span>
+                    <span ng-bind="announcement_detail.NAME"></span>
+                </li>
+                <li>
+                    <span>Title:</span>
+                    <span ng-bind="announcement_detail.TITLE"></span>
+                </li>
+                <li>
+                    <span>Content:</span>
+                    <span ng-bind="announcement_detail.CONTENT"></span>
+                </li>
+                <li>
+                    <span>Created at:</span>
+                    <span ng-bind="announcement_detail.DATE_CREATED"></span>
+                </li>
+                <li>
+                    <span>Attachments:</span>
+                    <ul>
+                        <li ng-repeat="attachment in announcement_attachment">
+                            <a href="attachment.URL" ng-bind="attachment.NAME"></a>
+                        </tr>
+                    </ul>
+                </li>
+                <a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a>
+            </ul>
+
+        </div>
     </div>
 </div>
