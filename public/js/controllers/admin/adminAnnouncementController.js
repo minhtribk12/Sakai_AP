@@ -2,4 +2,7 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
 
 	var user = $cookieStore.get('user') || null;
 		
+	AdminAnnouncement.getAnnouncement(user, $rootScope.cid).then(function(data){
+		$scope.announcement = data;
+	})
 });

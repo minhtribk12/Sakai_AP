@@ -2,7 +2,8 @@ angular.module('AdminResourcesService', []).factory('AdminResources', ['$http', 
 
 	return {
 		getResources: function(cid, data) {
-			return $http.post('/api/admin/resource', {cid: cid, user:data}).then(function (result) {
+			var param = {cid: cid, user:data};
+			return $http.post('/api/admin/resource', param).then(function (result) {
 				return result.data;
 			})
 		}

@@ -13,6 +13,7 @@ angular.module('adminLoginController', []).controller('AdminLoginController', fu
 			
 			AdminMain.checkLogIn($scope.user).then(function (data) {
 				if(data.length > 0){
+					$cookieStore.user = [];
 					$cookieStore.put('user', data[0]);
 					
 					$window.location.href = '/sakai';

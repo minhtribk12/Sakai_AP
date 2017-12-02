@@ -44,4 +44,12 @@ module.exports = function (app) {
         })
     });
 
+
+    app.post('/api/admin/announcement', function (req, res) {
+        var sql = 'SELECT * FROM announcement WHERE TRUE;'; // TODO
+        var params = [];
+        dao.query(sql, params, function(data){
+            res.json(data);
+        })
+    });
 };

@@ -2,7 +2,7 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
 
 	var user = $cookieStore.get('user') || null;
 
-	AdminResources.getResources(user, $rootScope.cid).then(function(data){
+	AdminResources.getResources($rootScope.cid, user).then(function(data){
 		$scope.files = data;
 	})
 });
