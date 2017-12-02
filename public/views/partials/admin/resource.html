@@ -3,15 +3,15 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>File name</th>
-                    <th>File description</th>
+                    <th>Name</th>
+                    <th>Description</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="file in files">
-                    <td>files.name</td>
-                    <td>files.description</td>
+                    <td>{{ file.NAME }}</td>
+                    <td>{{ file.DESCRIPTION }}</td>
                     <td><a href="#" class="btn btn-effets btn-primary btn-sm"><span>Download</span></a></td>
                 </tr>
             </tbody>

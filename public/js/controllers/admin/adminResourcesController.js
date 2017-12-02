@@ -4,5 +4,6 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
 
 	AdminResources.getResources($rootScope.cid, user).then(function(data){
 		$scope.files = data;
+		console.log(data);
 	})
 });

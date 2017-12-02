@@ -53,8 +53,7 @@
                         <span>Courses</span>
                         <li ng-repeat="course in courses">
                             <a href="#pageSubmenu{{$index}}" class="head" data-toggle="collapse" aria-expanded="false">
-                              <i class="fa fa-book"></i>AP
-                            </a>
+                              <i class="fa fa-book"></i> <span ng-bind="course.TITLE"></span>                            </a>
                             <ul class="collapse list-unstyled" id="pageSubmenu{{$index}}">
                                 <li><a href="/sakai/resource" ng-click="$root.cid = 123">Resource</a></li>
                                 <li><a href="/sakai/gradebook" ng-click="$root.cid = 123">GradeBook</a></li>
