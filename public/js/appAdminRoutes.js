@@ -29,6 +29,10 @@ angular.module('appAdminRoutes', []).config(['$routeProvider', '$locationProvide
             templateUrl: 'views/partials/admin/announcement.html',
             controller: 'AdminAnnouncementController'
         })
+    .when('/sakai/announcement/detail', {
+            templateUrl: 'views/partials/admin/announcement.html',
+            controller: 'AdminAnnouncementController'
+        }) 
     .when('/404', {
             templateUrl: '/views/404.html',
             title: '404 - Không tìm thấy trang yêu cầu',

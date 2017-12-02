@@ -22,7 +22,12 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
     }
 
     $scope.setCid = function (id) {
-        $cookieStore.remove('cid');
-        $cookieStore.put('cid', id);
+        var current_course_class = $cookieStore.get('cid');
+
+        if (current_course_class != null && cid == id) {
+            $cookieStore.remove('announcement_id');
+        } 
+        $cookieStore.remove('cdata');
+        $cookieStore.put('cdata', {'cid': id, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null});
     }
 });
