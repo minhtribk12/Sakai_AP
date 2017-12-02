@@ -1,8 +1,9 @@
 angular.module('adminResourcesController', []).controller('AdminResourcesController', function($scope, $rootScope, $route, md5, $window, $cookieStore, AdminResources) {
 
+    var user = $cookieStore.get('user') || null;
 	var cdata = $cookieStore.get('cdata') || {'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null};
 
-	AdminResources.getResources(cid, user).then(function(data) {
+	AdminResources.getResources(cdata.cid, user).then(function(data) {
 
         $scope.files = data;
         $scope.editting = "";

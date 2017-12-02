@@ -27,24 +27,32 @@
             <ul>
                 <li>
                     <span>Author:</span>
-                    <span ng-bind="announcement_detail.NAME"></span>
+                    <span ng-bind="assignment_detail.NAME"></span>
                 </li>
                 <li>
                     <span>Title:</span>
-                    <span ng-bind="announcement_detail.TITLE"></span>
+                    <span ng-bind="assignment_detail.TITLE"></span>
                 </li>
                 <li>
                     <span>Content:</span>
-                    <span ng-bind="announcement_detail.CONTENT"></span>
+                    <span ng-bind="assignment_detail.DESCRIPTION"></span>
                 </li>
                 <li>
                     <span>Created at:</span>
-                    <span ng-bind="announcement_detail.DATE_CREATED"></span>
+                    <span ng-bind="assignment_detail.DATE_CREATED"></span>
+                </li>
+                <li>
+                    <span>Start date:</span>
+                    <span ng-bind="assignment_detail.START_DATE"></span>
+                </li>
+                <li>
+                    <span>Due date:</span>
+                    <span ng-bind="assignment_detail.DUE_DATE"></span>
                 </li>
                 <li>
                     <span>Attachments:</span>
                     <ul>
-                        <li ng-repeat="attachment in announcement_attachment">
+                        <li ng-repeat="attachment in assignment_attachment">
                             <a href="attachment.URL" ng-bind="attachment.NAME"></a>
                         </tr>
                     </ul>
