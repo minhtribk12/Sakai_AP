@@ -21,11 +21,10 @@ module.exports = function (app) {
     
 	// TODO
     app.post('/api/admin/resource', function (req, res) {
-        var params = [req.body.users_id];
+        var params = [req.body.cid];
         var sql = 'SELECT * FROM resources WHERE course_class_id = ?';
-        console.log(req.body);
-        dao.query(sql, params, function(data){
 
+        dao.query(sql, params, function(data){
             res.json(data);
         })
     });
