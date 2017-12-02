@@ -61,5 +61,30 @@
             </ul>
 
         </div>
+
+        <!---------- Submission---------->
+        <div class="submission">
+            <div>Submission</div>
+            <ul>
+                <li>
+                    <span>Created at</span>
+                    <span ng-bind="submission.DATE_CREATED"></span>
+                </li>
+                <li>
+                    <span>Content:</span>
+                    <span ng-bind="submission.CONTENT"></span>
+                </li>
+                <li>
+                    <span>Attachments:</span>
+                    <ul>
+                        <li ng-repeat="sa in submission_attachment">
+                            <a href="sa.URL" ng-bind="sa.NAME"></a>
+                        </tr>
+                    </ul>
+                </li>
+                <a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a>
+            </ul>
+
+        </div>
     </div>
 </div>

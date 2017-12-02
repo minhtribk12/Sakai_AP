@@ -19,6 +19,20 @@ angular.module('AdminAssignmentService', []).factory('AdminAssignment', ['$http'
 			return $http.post('/api/admin/assignment/attachment', param).then(function (result) {
 				return result.data;
 			})
+		},
+
+		getSubmissions: function (assignment_id, user_id) {
+			var param = {assignment_id: assignment_id, user_id: user_id};
+			return $http.post('/api/admin/assignment/submission', param).then(function (result) {
+				return result.data;
+			})
+		},
+
+		getSubmissionAttachments: function (assignment_id, user_id) {
+			var param = {assignment_id: assignment_id, user_id: user_id};
+			return $http.post('/api/admin/assignment/submission/attachment', param).then(function (result) {
+				return result.data;
+			})
 		}
 	}; 
 

@@ -11,6 +11,13 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
 		AdminAssignment.getAssignmentAttachments(cdata.assignment_id).then(function(data){
 			$scope.assignment_attachment = data;
 		})
+		AdminAssignment.getSubmissions(cdata.assignment_id, user.users_id).then(function(data){
+			$scope.submission = data[0];
+		})
+
+		AdminAssignment.getSubmissionAttachments(cdata.assignment_id, user.users_id).then(function(data){
+			$scope.submission_attachment = data;
+		})
 	}
 
 	AdminAssignment.getAssignment(cdata.cid, user).then(function(data){

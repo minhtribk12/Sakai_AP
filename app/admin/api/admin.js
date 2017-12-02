@@ -137,7 +137,34 @@ module.exports = function (app) {
             var params = [req.body.assignment_id];
             
             dao.query(sql, params, function(data){
-                console.log(req.body.assignment_id)
+                res.json(data);
+            })
+        }
+        
+    });
+
+    app.post('/api/admin/assignment/submission', function (req, res) { 
+        if (req.body.assignment_id == null || req.body.user_id == null) {
+            res.send({});
+        } else {
+            var sql = 'SELECT * FROM submission s WHERE s.assignment_id = ? AND s.users_id = ? ORDER BY DATE_CREATED DESC';
+            var params = [req.body.assignment_id, req.body.user_id];
+            
+            dao.query(sql, params, function(data){
+                res.json(data);
+            })
+        }
+        
+    });
+
+    app.post('/api/admin/assignment/submission/attachment', function (req, res) { 
+        if (req.body.assignment_id == null || req.body.user_id == null) {
+            res.send({});
+        } else {
+            var sql = 'SELECT * FROM attachment a LEFT JOIN submission_attachment sa ON a.attachment_id = sa.attachment_id WHERE sa.submission_id = (SELECT submission_id FROM submission WHERE assignment_id = ? AND users_id = ? ORDER BY DATE_CREATED DESC LIMIT 1)';
+            var params = [req.body.assignment_id, req.body.user_id];
+            
+            dao.query(sql, params, function(data){
                 console.log(data)
                 res.json(data);
             })
