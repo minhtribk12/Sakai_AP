@@ -18,7 +18,6 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
        
         AdminMain.getCourses(user).then(function(data) {
             $scope.courses = data;
-            console.log(data)
         })
     }
 

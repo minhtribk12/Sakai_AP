@@ -1,6 +1,8 @@
 // api
 var main = require('./api/main');
 
+var fileUpload = require('./admin/fileUpload');
+
 // admin api
 var admin = require('./admin/api/admin');
 
@@ -11,6 +13,7 @@ module.exports = function (app) {
   // admin api route generate
   admin(app);
   // other route generate
+  fileUpload(app);
   
   app.get('/sakai', function (req, res) {
     res.sendFile(__base + './public/views/index_admin.html');

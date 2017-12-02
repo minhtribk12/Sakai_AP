@@ -10,11 +10,27 @@
             </thead>
             <tbody>
                 <tr ng-repeat="file in files">
-                    <td>{{ file.NAME }}</td>
-                    <td>{{ file.DESCRIPTION }}</td>
-                    <td><a href="#" class="btn btn-effets btn-primary btn-sm"><span>Download</span></a></td>
+                    <td ng-if="file.RESOURCES_ID != editting">{{ file.NAME }}</td>
+                    <td ng-if="file.RESOURCES_ID != editting">{{ file.DESCRIPTION }}</td>
+                    <td ng-if="file.RESOURCES_ID == editting">
+                        <input ng-model="file.NAME" />
+                    </td>
+                    <td ng-if="file.RESOURCES_ID == editting">
+                        <input ng-model="file.DESCRIPTION" />
+                    </td>
+                    <td><a href="{{file.attURL}}" target="_self" class="btn btn-effets btn-primary btn-sm" download="{{file.attNAME}}"><span>Download</span></a>
+
+
+                        <button class="btn btn-primary btn-sm" ng-click="editResource(file.RESOURCES_ID)" ng-if="editting == ''"><span>Edit</span></button>
+
+                        <button class="btn btn-primary btn-sm" ng-click="updateResource(file)" ng-if="file.RESOURCES_ID == editting"><span>Update</span></button>
+
+                        <button class="btn btn-primary btn-sm" ng-click="deleteResource(file.RESOURCES_ID)"><span>Delete</span></button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+
+        <input type="file" id="myimage" onchange="angular.element(this).scope().loadedfile()">
     </div>
 </div>
