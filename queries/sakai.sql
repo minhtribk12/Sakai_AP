@@ -65,6 +65,19 @@ SELECT * FROM discussion d LEFT JOIN users u ON d.users_id = u.users_id WHERE d.
 	# Query: SELECT * FROM message m LEFT JOIN discussion d ON d.discussion_id = m.discussion_id LEFT JOIN users u ON u.users_id = m.users_id WHERE m.discussion_id = <discussion id> ORDER BY m.date_created DESC;
 	SELECT * FROM message m LEFT JOIN discussion d ON d.discussion_id = m.discussion_id LEFT JOIN users u ON u.users_id = m.users_id WHERE m.discussion_id = 1 ORDER BY m.date_created DESC;
 
+	# CREATE A DISCUSSION
+	# Given: A course class's id, current user's id, topic of the discussion 
+	# Target: Create a discussion
+	# Query: INSERT INTO discussion(course_class_id, users_id, topic, date_created) VALUES(<course class id>, <author id>, <topic>, now()); 
+	INSERT INTO discussion(course_class_id, users_id, topic, date_created) VALUES(1, 1, 'Topic 1', now()); 
+
+	# REMOVE A DISCUSSION
+	# Given: A discussion's id
+	# Target: Remove the discussion
+	# Query: DELETE FROM message WHERE discussion_id = <discussion id>;DELETE FROM discussion WHERE discussion_id = <discussion id>; 
+	DELETE FROM message WHERE discussion_id = 1;
+	DELETE FROM discussion WHERE discussion_id = 1;
+
 # ASSIGNMENT LIST
 # Given: A course_class_id
 # Target: Query all assingments of that course class plus their authors
@@ -95,6 +108,9 @@ SELECT * FROM assingment a LEFT JOIN users u on u.users_id = a.users_id WHERE a.
 	# Query: SELECT * FROM attachment a LEFT JOIN submission_attachment sa ON a.attachment_id = sa.attachment_id WHERE sa.submission_id = <submission id>;
 	SELECT * FROM attachment a LEFT JOIN submission_attachment sa ON a.attachment_id = sa.attachment_id WHERE sa.submission_id = 1;
 
+	# CREATE AN ASSIGNMENT
+	# Given: A course class's id, current user's id, 
+
 # GRADEBOOK LIST FOR STUDENT
 # Given: A course_class_id and a student's id
 # Target: Query all gradebook of that course class and student
@@ -107,3 +123,28 @@ SELECT * FROM gradebook g WHERE g.users_id = 1 AND g.course_class_id = 1;
 # Query: SELECT * FROM gradebook g WHERE g.users_id = <student id> AND g.course_class_id = <course class id>; 
 //TODO
 
+
+
+# RESOURCE LIST
+# Given: A course_class_id
+# Target: Query all resources of that course class plus their authors
+# Query: SELECT * FROM resources a LEFT JOIN users u on u.users_id = a.users_id WHERE a.course_class_id = <course class id>; 
+SELECT * FROM resources WHERE course_class_id = 1; 
+
+	# CREATE RESOURCE
+	# Given: A course class's id, current user's id, title, content
+	# Target: Create an announcement
+	# Query: INSERT INTO announcement(course_class_id, users_id, title, content, date_created) VALUES(<course class id>, <author id>, <title>, <content>, now()); 
+	INSERT INTO announcement(course_class_id, users_id, title, content, date_created) VALUES(1, 1, 'Annoucement test', 'test', now());
+
+	# UPDATE AN ANNOUNCEMENT
+	# Given: A announcement's id, title, content that need to be updated
+	# Target: Update the announcement
+	# Query: UPDATE announcement SET title = <new title>, content = <new content> WHERE announcement_id = <announcement id>;
+	UPDATE announcement SET title = 'AP Announcement 1', content = 'abcd' WHERE announcement_id = 1;
+
+	# DELETE AN ANNOUNCEMENT
+	# Given: A announcement's id needing to be removed
+	# Target: Delete the announcement
+	# Query: DELETE FROM announcement WHERE announcement_id = <announcement id>;
+	DELETE FROM announcement WHERE announcement_id = 1;
