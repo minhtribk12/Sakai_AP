@@ -21,4 +21,9 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
             console.log(data)
         })
     }
+
+    $scope.setCid = function (id) {
+        $cookieStore.remove('cid');
+        $cookieStore.put('cid', id);
+    }
 });

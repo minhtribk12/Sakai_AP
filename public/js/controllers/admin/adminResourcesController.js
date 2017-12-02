@@ -1,9 +1,10 @@
 angular.module('adminResourcesController', []).controller('AdminResourcesController', function($scope,$rootScope, $route,md5, $window,$cookieStore, AdminResources) {
 
 	var user = $cookieStore.get('user') || null;
+	var  = $cookieStore.get('cid')
 
-	AdminResources.getResources($rootScope.cid, user).then(function(data){
+	AdminResources.getResources(cid, user).then(function(data){
+
 		$scope.files = data;
-		console.log(data);
 	})
 });

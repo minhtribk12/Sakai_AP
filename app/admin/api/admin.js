@@ -23,7 +23,7 @@ module.exports = function (app) {
     app.post('/api/admin/resource', function (req, res) {
         var params = [req.body.users_id];
         var sql = 'SELECT * FROM resources WHERE course_class_id = ?';
-
+        console.log(req.body);
         dao.query(sql, params, function(data){
 
             res.json(data);
