@@ -19,7 +19,7 @@ module.exports = function(app) {
 
         if (req.body.fileUpdated.RESOURCES_ID != null) {
             params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID, req.body.fileUpdated.RESOURCES_ID];
-            sql = 'UPDATE resources SET name = ?, description = ?, attachment_id WHERE resources_id = ?';
+            sql = 'UPDATE resources SET name = ?, description = ?, attachment_id = ? WHERE resources_id = ?';
         } else {
             params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID];
             sql = 'INSERT INTO resources(course_class_id, name, description, attachment_id) VALUES(?, ?, ?, ?)';
@@ -31,16 +31,6 @@ module.exports = function(app) {
             } else {
                 res.send(false);
             }
-        })
-    });
-
-    app.put('/api/admin/resource/new', function(req, res) {
-
-        var params = [req.body.resource.COURSE.cid, req.body.resource.NAME, req.body.resource.NAME, req.body.resource.ATTACHMENT_ID];
-        var sql = 'Insert into RESOURCES (COURSE_CLASS_ID, NAME, DESCRIPTION, ATTACHMENT_ID) Values( ?,? ,?, ?);';
-
-        dao.query(sql, params, function(data) {
-            res.send(true); //mean: update success
         })
     });
 

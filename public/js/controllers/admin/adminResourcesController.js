@@ -29,6 +29,7 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
                     alert('Failed to create the resource!');
                 }
             }
+            loadData();
         })
     }
     $scope.deleteResource = function(id) {
@@ -57,16 +58,10 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
             processData: false,
             type: 'POST',
             success: function(data) {
-                var newRes = {
-                    ATTACHMENT_ID: data.insertId,
-                    NAME: data.originalname,
-                    COURSE: cdata
-                };
+                $scope.resource.AttNAME = data.originalname;
+                $scope.resource.ATTACHMENT_ID = data.insertId;
 
-                AdminResources.addResources(newRes, user).then(function(res){
-                    loadData();
-                    $('#myfile').val(null);
-                })
+                $('#myfile').val(null);
             }
         });
     }

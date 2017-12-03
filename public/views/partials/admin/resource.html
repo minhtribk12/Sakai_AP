@@ -1,7 +1,6 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
     <div class="main-content">
         <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
-        <button class="btn btn-primary btn-sm" onclick="$('#myfile').click()"><span class="glyphicon glyphicon-plus">Add</span></button>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -31,7 +30,7 @@
         
     </div>
         <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="resource = {}">
       Create new resource
     </button>
 
@@ -55,7 +54,9 @@
                         </div>
                         <div class="form-group">
                             <label for="resource-file" class="control-label">Choose a resource file to upload</label>
-                            <input type="file" class="filestyle" data-icon="false" id="resource-file" class="custom-file-input">                        
+                            <button class="btn btn-primary btn-sm" onclick="$('#myfile').click()"><span class="glyphicon glyphicon-cloud-upload">Upload</span></button>
+                            <input type="text" ng-model="resource.AttNAME">
+                            <input type="text" ng-model="resource.ATTACHMENT_ID" style="display: none;">
                         </div>
                     </form>
                 </div>
