@@ -28,16 +28,15 @@ module.exports = function (app) {
         })
     });
 
-    // TODO : this is update for resource
+    // TODO : add attachment id
     app.put('/api/admin/resource', function (req, res) {
-        console.log(req.body.fileUpdated) // => data in this
-        var params = [];
-        var sql = '';
-        res.send(true);// this is dummy -> delete it
+        var params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.RESOURCES_ID];
+        var sql = 'UPDATE resources SET name = ?, description = ? WHERE resources_id = ?';
 
-        // dao.query(sql, params, function(data){ // uncomment it
-        //     res.send(true); //mean: update success
-        // })
+        dao.query(sql, params, function(data){ 
+            console.log(data)
+            res.send(true); //mean: update success
+        })
     });
 
     // TODO: this is delete funciton
@@ -171,4 +170,35 @@ module.exports = function (app) {
         }
         
     });
+
+
+    app.post('/api/admin/discussion', function (req, res) {
+        if (req.body.cid == null) {
+            res.send({});
+        } else {
+            var sql = 'SELECT * FROM discussion d LEFT JOIN users u on u.users_id = d.users_id WHERE d.course_class_id = ?';
+            var params = [req.body.cid];
+            
+            dao.query(sql, params, function(data){
+                res.json(data);
+            })
+        }
+    });
+
+    app.post('/api/admin/discussion/detail', function (req, res) { 
+        if (req.body.discussion_id == null) {
+            res.send({});
+        } else {
+            var sql = 'SELECT * FROM message m LEFT JOIN users u on m.users_id = u.users_id WHERE m.discussion_id = ? ORDER BY m.date_created DESC';
+            var params = [req.body.discussion_id];
+            
+            dao.query(sql, params, function(data){
+                res.json(data);
+            })
+        }
+        
+    });
+
+
+
 };
