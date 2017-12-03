@@ -50,16 +50,6 @@ module.exports = function (app) {
         // })
     });
 
-    // TODO
-    app.post('/api/admin/gradebook', function (req, res) {
-    	
-        var sql = 'SELECT * FROM gradebook';
-        var params = [];
-        dao.query(sql, params, function(data){
-            res.json(data);
-        })
-    });
-
     app.post('/api/admin/announcement', function (req, res) {
         var sql = 'SELECT * FROM announcement a LEFT JOIN users u on u.users_id = a.users_id WHERE a.course_class_id = ?';
         var params = [req.body.cid];
@@ -191,6 +181,20 @@ module.exports = function (app) {
         } else {
             var sql = 'SELECT * FROM message m LEFT JOIN users u on m.users_id = u.users_id WHERE m.discussion_id = ? ORDER BY m.date_created DESC';
             var params = [req.body.discussion_id];
+            
+            dao.query(sql, params, function(data){
+                res.json(data);
+            })
+        }
+        
+    });
+
+    app.post('/api/admin/gradebook', function (req, res) { 
+        if (req.body.cid == null || req.body.user == null) {
+            res.send({});
+        } else {
+            var sql = 'SELECT * FROM gradebook g LEFT JOIN gradebook_item gi on g.gradebook_item_id = gi.gradebook_item_id WHERE g.users_id = ? AND gi.course_class_id = ?;';
+            var params = [req.body.user, req.body.cid];
             
             dao.query(sql, params, function(data){
                 res.json(data);

@@ -4,17 +4,16 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>grade</th>
-                    <th></th>
+                    <th>Grade</th>
+                    <th>Note</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="grade in gradebook">
-                    <td>grade.id</td>
-                    <td>grade.title</td>
-                    <td></td>
+                <tr ng-repeat="gradebook in gradebooks">
+                    <td ng-bind="gradebook.TITLE"></td>
+                    <td ng-bind="gradebook.GRADE"></td>
+                    <td ng-bind="gradebook.NOTE"></td>
                 </tr>
             </tbody>
         </table>
-    </div>
 </div>
