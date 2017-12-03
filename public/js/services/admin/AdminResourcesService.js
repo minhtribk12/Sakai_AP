@@ -10,14 +10,21 @@ angular.module('AdminResourcesService', []).factory('AdminResources', ['$http', 
 
 		updateResources: function(fileUpdated, data) {
 			var param = {fileUpdated: fileUpdated, user:data};
-			return $http.put('/api/admin/resource', param).then(function (result) {
+			return $http.put('/api/admin/resource/update', param).then(function (result) {
 				return result.data;
 			})
 		},
 
 		deleteResources: function(resId, data) {
 			var param = {resId: resId, user:data};
-			return $http.delete('/api/admin/resource', param).then(function (result) {
+			return $http.post('/api/admin/resource/delete', param).then(function (result) {
+				return result.data;
+			})
+		},
+
+		addResources: function(resource, user) {
+			var param = {resource: resource, user:user};
+			return $http.put('/api/admin/resource/new', param).then(function (result) {
 				return result.data;
 			})
 		},

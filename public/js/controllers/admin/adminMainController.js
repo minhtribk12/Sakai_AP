@@ -24,7 +24,7 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
     $scope.setCid = function (id) {
         var current_course_class = $cookieStore.get('cid');
 
-        if (current_course_class != null && cid == id) {
+        if (current_course_class != null && current_course_class == id) {
             $cookieStore.remove('announcement_id');
         } 
         $cookieStore.remove('cdata');

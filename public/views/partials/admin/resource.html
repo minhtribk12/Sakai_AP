@@ -1,5 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
     <div class="main-content">
+        <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
+        <button class="btn btn-primary btn-sm" onclick="$('#myfile').click()"><span class="glyphicon glyphicon-plus">Add</span></button>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -19,18 +21,13 @@
                         <input ng-model="file.DESCRIPTION" />
                     </td>
                     <td><a href="{{file.attURL}}" target="_self" class="btn btn-effets btn-primary btn-sm" download="{{file.attNAME}}"><span>Download</span></a>
-
-
                         <button class="btn btn-primary btn-sm" ng-click="editResource(file.RESOURCES_ID)" ng-if="editting == ''"><span>Edit</span></button>
-
                         <button class="btn btn-primary btn-sm" ng-click="updateResource(file)" ng-if="file.RESOURCES_ID == editting"><span>Update</span></button>
-
                         <button class="btn btn-primary btn-sm" ng-click="deleteResource(file.RESOURCES_ID)"><span>Delete</span></button>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        <input type="file" id="myimage" onchange="angular.element(this).scope().loadedfile()">
+        
     </div>
 </div>

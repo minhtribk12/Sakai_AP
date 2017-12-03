@@ -65,7 +65,6 @@ module.exports = function(app) {
             var params = [req.body.assignment_id, req.body.user_id];
 
             dao.query(sql, params, function(data) {
-                console.log(data)
                 res.json(data);
             })
         }

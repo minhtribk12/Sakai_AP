@@ -1,13 +1,10 @@
 angular.module('adminResourcesController', []).controller('AdminResourcesController', function($scope, $rootScope, $route, md5, $window, $cookieStore, AdminResources) {
 
     var user = $cookieStore.get('user') || null;
-	var cdata = $cookieStore.get('cdata') || {'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null};
+    var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null };
 
-	AdminResources.getResources(cdata.cid, user).then(function(data) {
 
-        $scope.files = data;
-        $scope.editting = "";
-    });
+    loadData();
 
     $scope.editResource = function(id) {
         if ($scope.editting != "") {
@@ -26,11 +23,11 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
         })
     }
 
-    $scope.deleteRes = function(id) {
+    $scope.deleteResource = function(id) {
         if (confirm('Are you sure ? ')) {
             AdminResources.deleteResources(id, user).then(function(data) {
                 if (data) {
-                    $scope.editting = "";
+                    loadData();
                 } else {
                     alert('delete Failed');
                 }
@@ -38,10 +35,10 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
         }
     }
 
-    $scope.loadedfile = function(){
+    $scope.loadedfile = function() {
         var data = new FormData();
-        jQuery.each(jQuery('#myimage')[0].files, function(i, file) {
-            data.append('file-'+i, file);
+        jQuery.each(jQuery('#myfile')[0].files, function(i, file) {
+            data.append('file-' + i, file);
         });
 
         jQuery.ajax({
@@ -51,9 +48,26 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
             contentType: false,
             processData: false,
             type: 'POST',
-            success: function(data){
-                alert("OK");
+            success: function(data) {
+                var newRes = {
+                    ATTACHMENT_ID: data.insertId,
+                    NAME: data.originalname,
+                    COURSE: cdata
+                };
+
+                AdminResources.addResources(newRes, user).then(function(res){
+                    loadData();
+                    $('#myfile').val(null);
+                })
             }
+        });
+    }
+
+    function loadData() {
+        // Reload data
+        AdminResources.getResources(cdata.cid, user).then(function(data) {
+            $scope.files = data;
+            $scope.editting = "";
         });
     }
 });
