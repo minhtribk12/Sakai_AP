@@ -5,11 +5,23 @@ var fileUpload = require('./admin/fileUpload');
 
 // admin api
 var admin = require('./admin/api/admin');
+var annoucement = require('./admin/api/annoucement');
+var assignment = require('./admin/api/assignment');
+var discussion = require('./admin/api/discussion');
+var gradebook = require('./admin/api/gradebook');
+var resource = require('./admin/api/resource');
 
 module.exports = function (app) {
     
   // api route generate
   main(app);
+
+  annoucement(app);
+  assignment(app);
+  discussion(app);
+  gradebook(app);
+  resource(app);
+
   // admin api route generate
   admin(app);
   // other route generate

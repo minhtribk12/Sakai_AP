@@ -33,13 +33,20 @@ var uploadFile = function(req, res) {
 		  path: 'public\\UploadFile\\eclipse-1512232371830.ini',
 		  size: 569 }*/
 
-        var sql = '';
-        var params = [req.body.username, req.body.passwd];
+        var sql = 'INSERT INTO attachment (`NAME`, `URL`) VALUES ( ? , ?); ';
+        var params = [file.originalname, file.path];
         dao.query(sql, params, function(data){
+        	/*Packet {
+			  fieldCount: 0,
+			  affectedRows: 1,
+			  insertId: 33,
+			  serverStatus: 2,
+			  warningCount: 0,
+			  message: '',
+			  protocol41: true,
+			  changedRows: 0 } */
             res.json(data);
         })
     })
-
-    res.send(200);
 
 }
