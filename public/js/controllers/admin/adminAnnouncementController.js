@@ -22,4 +22,21 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
         $cookieStore.put('cdata', {'cid': id, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id});
 		getAnnouncementDetail();
     }
+
+    $scope.updateAnnouncement = function(file) {
+        file.COURSE_CLASS_ID = cdata.cid;
+        AdminAnnouncement.updateAnnouncement(file, user).then(function(data) {
+            if (file.ANNOUNCEMENT_ID != null) {
+                if (!data) {
+                   alert('Update failed');
+                } 
+            } else {
+                if (data) {
+                    alert('Created successfully!');
+                } else {
+                    alert('Failed to create the resource!');
+                }
+            }
+        })
+    }
 });

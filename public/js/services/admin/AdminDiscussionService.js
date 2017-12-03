@@ -13,6 +13,18 @@ angular.module('AdminDiscussionService', []).factory('AdminDiscussion', ['$http'
 				return result.data;
 			})
 		},
+		addDiscussion: function(fileUpdated, data) {
+			var param = {fileUpdated: fileUpdated, user:data};
+			return $http.put('/api/admin/discussion/add', param).then(function (result) {
+				return result.data;
+			})
+		},
+		addMessage: function(fileUpdated, data) {
+			var param = {fileUpdated: fileUpdated, user:data};
+			return $http.put('/api/admin/discussion/message/add', param).then(function (result) {
+				return result.data;
+			})
+		}
 	};
 
 }]);

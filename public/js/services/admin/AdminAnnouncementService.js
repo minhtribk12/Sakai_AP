@@ -19,6 +19,13 @@ angular.module('AdminAnnouncementService', []).factory('AdminAnnouncement', ['$h
 			return $http.post('/api/admin/announcement/attachment', param).then(function (result) {
 				return result.data;
 			})
+		},
+
+		updateAnnouncement: function(fileUpdated, data) {
+			var param = {fileUpdated: fileUpdated, user:data};
+			return $http.put('/api/admin/announcement/update', param).then(function (result) {
+				return result.data;
+			})
 		}
 	};
 

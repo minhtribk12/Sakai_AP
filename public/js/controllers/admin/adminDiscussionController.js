@@ -20,4 +20,26 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 		getDiscussionDetail();
     }
 
+    $scope.addDiscussion = function(file) {
+        file.COURSE_CLASS_ID = cdata.cid;
+        AdminDiscussion.addDiscussion(file, user).then(function(data) {
+        	if (data) {
+                alert('Created successfully!');
+            } else {
+                alert('Failed to create the discussion!');
+            }
+        })
+    }
+
+    $scope.addComment = function(file) {
+        file.COURSE_CLASS_ID = cdata.cid;
+        AdminDiscussion.addComment(file, user).then(function(data) {
+        	if (data) {
+                alert('Created successfully!');
+            } else {
+                alert('Failed to create a comment!');
+            }
+        })
+    }
+
 });

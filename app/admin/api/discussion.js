@@ -28,4 +28,34 @@ module.exports = function(app) {
         }
 
     });
+
+    // cannot edit discussions
+    app.put('/api/admin/discussion/add', function(req, res) {
+        var params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.user.users_id, req.body.fileUpdated.TOPIC];
+        var sql = 'INSERT INTO discussion(course_class_id, users_id, topic, date_created) VALUES(?, ?, ?, NOW())';
+            //TODO: upload files, create attachments
+       
+        dao.query(sql, params, function(data) {
+            if (data != null) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        })
+    });
+
+    // cannot edit messages
+    app.put('/api/admin/discussion/message/add', function(req, res) {
+        var params = [req.body.fileUpdated.DISCUSSION_ID, req.body.user.users_id, req.body.fileUpdated.CONTENT];
+        var sql = 'INSERT INTO message(discussion_id, users_id, content, date_created) VALUES(?, ?, ?, NOW())';
+            //TODO: upload files, create attachments
+       
+        dao.query(sql, params, function(data) {
+            if (data != null) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        })
+    });
 }

@@ -39,4 +39,33 @@
 
         </div>
     </div>
+
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newDiscussionModal">
+      Create new discussion
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="newDiscussionModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="newDiscussionModalLabel" style="font-weight: bold;">Create a new discussion</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="discussion-form">
+                        <div class="form-group">
+                            <label for="discussion-topic" class="control-label">Topic:</label>
+                            <input type="text" class="form-control" id="discussion-topic" ng-model="discussion.TOPIC">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addDiscussion(discussion)">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

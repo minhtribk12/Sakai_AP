@@ -42,4 +42,26 @@ module.exports = function(app) {
         }
 
     });
+
+    app.put('/api/admin/announcement/update', function(req, res) {
+        var params;
+        var sql;
+
+        if (req.body.fileUpdated.ANNOUNCEMENT_ID != null) {
+            params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.CONTENT, req.body.fileUpdated.ANNOUNCEMENT_ID];
+            sql = 'UPDATE announcement SET title = ?, content = ? WHERE announcement_id = ?';
+        } else {
+            params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.user.users_id, req.body.fileUpdated.TITLE, req.body.fileUpdated.CONTENT];
+            sql = 'INSERT INTO announcement(course_class_id, users_id, title, content, date_created) VALUES(?, ?, ?, ?, NOW())';
+            //TODO: upload files, create attachments
+        }
+
+        dao.query(sql, params, function(data) {
+            if (data != null) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        })
+    });
 }

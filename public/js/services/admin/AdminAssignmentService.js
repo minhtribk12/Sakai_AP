@@ -33,6 +33,13 @@ angular.module('AdminAssignmentService', []).factory('AdminAssignment', ['$http'
 			return $http.post('/api/admin/assignment/submission/attachment', param).then(function (result) {
 				return result.data;
 			})
+		},
+
+		updateAssignment: function(fileUpdated, data) {
+			var param = {fileUpdated: fileUpdated, user:data};
+			return $http.put('/api/admin/assignment/update', param).then(function (result) {
+				return result.data;
+			})
 		}
 	}; 
 

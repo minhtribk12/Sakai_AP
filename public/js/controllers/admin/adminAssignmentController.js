@@ -30,4 +30,21 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
 		getAssignmentDetail();
     }
 
+    $scope.updateAssignment = function(file) {
+        file.COURSE_CLASS_ID = cdata.cid;
+        AdminAssignment.updateAssignment(file, user).then(function(data) {
+            if (file.ASSIGNMENT_ID != null) {
+                if (!data) {
+                   alert('Update failed');
+                } 
+            } else {
+                if (data) {
+                    alert('Created successfully!');
+                } else {
+                    alert('Failed to create the assignment!');
+                }
+            }
+        })
+    }
+
 });

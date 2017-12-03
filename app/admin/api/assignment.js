@@ -70,4 +70,35 @@ module.exports = function(app) {
         }
 
     });
+
+    app.put('/api/admin/assignment/update', function(req, res) {
+        var params;
+        var sql;
+
+        if (req.body.fileUpdated.START_DATE != null) {
+            req.body.fileUpdated.START_DATE = new Date(Date.parse(req.body.fileUpdated.START_DATE))
+        }
+        if (req.body.fileUpdated.DUE_DATE != null) {
+            req.body.fileUpdated.DUE_DATE = new Date(Date.parse(req.body.fileUpdated.DUE_DATE))
+        }
+
+        console.log(req.body)
+        if (req.body.fileUpdated.ASSIGNMENT_ID != null) {
+            params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ASSIGNMENT_ID];
+            sql = 'UPDATE assignment SET title = ?, description = ?, start_date = ?, due_date = ? WHERE assignment_id = ?';
+        } else {
+            params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.user.users_id, req.body.fileUpdated.TITLE, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.START_DATE, req.body.fileUpdated.DUE_DATE];
+            sql = 'INSERT INTO assignment(course_class_id, users_id, title, description, start_date, due_date, date_created) VALUES(?, ?, ?, ?, ?, ?, NOW())';
+            //TODO: upload files, create attachments
+        }
+
+        dao.query(sql, params, function(data) {
+            if (data != null) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        })
+    });
+
 }
