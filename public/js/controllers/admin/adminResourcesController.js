@@ -14,15 +14,23 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
     }
 
     $scope.updateResource = function(file) {
+        file.COURSE_CLASS_ID = cdata.cid;
         AdminResources.updateResources(file, user).then(function(data) {
-            if (data) {
-                $scope.editting = "";
+            if (file.RESOURCES_ID != null) {
+                if (data) {
+                    $scope.editting = "";
+                } else {
+                    alert('Update failed');
+                }
             } else {
-                alert('Update failed');
+                if (data) {
+                    alert('Created successfully!');
+                } else {
+                    alert('Failed to create the resource!');
+                }
             }
         })
     }
-
     $scope.deleteResource = function(id) {
         if (confirm('Are you sure ? ')) {
             AdminResources.deleteResources(id, user).then(function(data) {

@@ -12,11 +12,25 @@ module.exports = function(app) {
     });
 
     app.put('/api/admin/resource/update', function(req, res) {
-        var params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.RESOURCES_ID];
-        var sql = 'UPDATE resources SET name = ?, description = ? WHERE resources_id = ?';
+        var params;
+        var sql;
+
+        console.log(req.body)
+
+        if (req.body.fileUpdated.RESOURCES_ID != null) {
+            params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID, req.body.fileUpdated.RESOURCES_ID];];
+            sql = 'UPDATE resources SET name = ?, description = ?, attachment_id WHERE resources_id = ?';
+        } else {
+            params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID];
+            sql = 'INSERT INTO resources(course_class_id, name, description, attachment_id) VALUES(?, ?, ?, ?)';
+        }
 
         dao.query(sql, params, function(data) {
-            res.send(true); //mean: update success
+            if (data != null) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
         })
     });
 
