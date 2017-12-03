@@ -1,12 +1,24 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
     <div class="main-content">
-
         <div style="padding: 10px">
-        <h3>Bước 2:</h3>
-        <div id="drop">Kéo file vào đây</div>
-        <p style="margin-top: 10px;">Hoặc là chọn file<input class="form-control file-upload" type="file" name="xlfile" id="xlf" style="display: inline;" /></p>
-    </div>
-
+            <div id="drop">Kéo file vào đây</div>
+            <p style="margin-top: 10px;">Hoặc là chọn file
+                <select name="format" style="display: none">
+                    <option value="csv"> CSV</option>
+                    <option value="json" selected> JSON</option>
+                    <option value="form"> FORMULAE</option>
+                </select>
+                <input type="checkbox" name="useworker" style="display: none" />
+                <input type="checkbox" name="xferable" style="display: none" />
+                <input type="checkbox" name="userabs" style="display: none" />
+                <input class="form-control file-upload" type="file" name="xlfile" id="xlf" style="display: inline;" />
+                <select class="form-control" ng-model="sheet.name" ng-if="jsonExcel != null" ng-change="choiceSheet()">
+                    <option value="" selected disabled>-- Choice Sheet --</option>
+                    <option ng-repeat="(key, val) in jsonExcel track by $index" value="{{key}}">{{key}}</option>
+                </select>
+                <button class="btn btn-app-sm" ng-click="submitPoint()" ng-if="ListData != null">Lưu dữ liệu</button>
+            </p>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -23,4 +35,17 @@
                 </tr>
             </tbody>
         </table>
+        <style>
+        #drop {
+            border: 2px dashed #bbb;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            padding: 49px;
+            text-align: center;
+            font: 20pt bold, "Vollkorn";
+            color: #bbb
+        }
+        </style>
+    </div>
 </div>

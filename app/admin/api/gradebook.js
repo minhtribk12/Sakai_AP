@@ -15,4 +15,10 @@ module.exports = function(app) {
         }
 
     });
+
+    // TODO: insert to db
+    app.put('/api/admin/gradebook', function(req, res) {
+        console.log(req.body)
+       res.send(false);
+    });
 }
