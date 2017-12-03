@@ -27,7 +27,7 @@ angular.module('AdminResourcesService', []).factory('AdminResources', ['$http', 
 			return $http.put('/api/admin/resource/new', param).then(function (result) {
 				return result.data;
 			})
-		},
+		}
 	};
 
 }]);

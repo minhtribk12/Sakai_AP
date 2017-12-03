@@ -18,7 +18,7 @@ module.exports = function(app) {
         console.log(req.body)
 
         if (req.body.fileUpdated.RESOURCES_ID != null) {
-            params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID, req.body.fileUpdated.RESOURCES_ID];];
+            params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID, req.body.fileUpdated.RESOURCES_ID];
             sql = 'UPDATE resources SET name = ?, description = ?, attachment_id WHERE resources_id = ?';
         } else {
             params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID];
