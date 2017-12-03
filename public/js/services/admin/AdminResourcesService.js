@@ -20,7 +20,7 @@ angular.module('AdminResourcesService', []).factory('AdminResources', ['$http', 
 			return $http.post('/api/admin/resource/delete', param).then(function (result) {
 				return result.data;
 			})
-		}
+		},
 
 		addResources: function(resource, user) {
 			var param = {resource: resource, user:user};
