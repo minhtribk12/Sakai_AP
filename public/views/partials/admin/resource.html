@@ -1,38 +1,58 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+
+<div>
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}">
+        <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
+
     <div class="main-content">
         <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="file in files">
-                    <td ng-if="file.RESOURCES_ID != editting">{{ file.NAME }}</td>
-                    <td ng-if="file.RESOURCES_ID != editting">{{ file.DESCRIPTION }}</td>
-                    <td ng-if="file.RESOURCES_ID == editting">
-                        <input ng-model="file.NAME" />
-                    </td>
-                    <td ng-if="file.RESOURCES_ID == editting">
-                        <input ng-model="file.DESCRIPTION" />
-                    </td>
-                    <td><a href="{{file.attURL}}" target="_self" class="btn btn-effets btn-primary btn-sm" download="{{file.attNAME}}"><span>Download</span></a>
-                            <button class="btn btn-primary btn-sm" ng-click="editResource(file.RESOURCES_ID)" ng-if="editting == ''"><span>Edit</span></button>
-                            <button class="btn btn-primary btn-sm" ng-click="updateResource(file)" ng-if="file.RESOURCES_ID == editting"><span>Update</span></button>
-                        <button class="btn btn-primary btn-sm" ng-click="deleteResource(file.RESOURCES_ID)"><span>Delete</span></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Course resources</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th style="width: 300px"></th>
+                                </tr>
+                                <tr ng-repeat="file in files">
+                                    <td ng-if="file.RESOURCES_ID != editting">{{ file.NAME }}</td>
+                                    <td ng-if="file.RESOURCES_ID != editting">{{ file.DESCRIPTION }}</td>
+                                    <td ng-if="file.RESOURCES_ID == editting">
+                                        <input ng-model="file.NAME" />
+                                    </td>
+                                    <td ng-if="file.RESOURCES_ID == editting">
+                                        <input ng-model="file.DESCRIPTION" />
+                                    </td>
+                                    <td style="text-align: right"><a href="{{file.attURL}}" target="_self" class="btn btn-effets btn-primary btn-sm" download="{{file.attNAME}}"><span class="glyphicon glyphicon-download-alt"></span></a>
+                                        <button type="button" class="btn btn-success btn-sm" ng-click="editResource(file.RESOURCES_ID)" ng-if="editting == ''">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm" ng-click="updateResource(file)" ng-if="file.RESOURCES_ID == editting">
+                                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" ng-click="updateResource(file)" ng-if="file.RESOURCES_ID == editting">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
+        </div>
     </div>
-        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="resource = {}">
-      Create new resource
-    </button>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -66,6 +86,10 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
+
 </div>
 

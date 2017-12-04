@@ -9,64 +9,105 @@
     <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../libs/ng-tags-input/ng-tags-input.css">
-    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/admin.css">
     <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+     --><link rel="stylesheet" type="text/css" href="../css/AdminLTE.css">
+    <link rel="stylesheet" type="text/css" href="../css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../css/skins/_all-skins.min.css">
 </head>
 
-<body ng-app="admin" ng-controller="AdminMainController">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="home-logo-text" href="#">Sakai</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
-                    <li class="avatar">
-                        <a href="#">
-              {{full_name}}
-              <img src="images/user_admin.png" class="user-img img-circle">
-            </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <style type="text/css">
-    .nav-sidebar li span {
-        padding-left: 0px;
-        color: white;
-    }
-    </style>
-    <div class="row">
-        <div class="col-md-2 col-sm-3 sidebar" id="dashboard">
-            <div class="cover" style="overflow-y: scroll;" id="sidebar">
-                <ul class="nav nav-sidebar">
-                    <li>
-                        <span>Courses</span>
-                        <li ng-repeat="course in courses" ng-click="setCid(course.COURSE_CLASS_ID)">
-                            <a href="#pageSubmenu{{$index}}" class="head" data-toggle="collapse" aria-expanded="false">
-                              <i class="fa fa-book"></i> <span ng-bind="course.TITLE"></span>                            </a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu{{$index}}">
-                                <li><a href="/sakai/resource" ng-click="setCid(course.COURSE_CLASS_ID)">Resource</a></li>
-                                <li><a href="/sakai/gradebook" ng-click="setCid(course.COURSE_CLASS_ID)">GradeBook</a></li>
-                                <li><a href="/sakai/assignment" ng-click="setCid(course.COURSE_CLASS_ID)">Assignment</a></li>
-                                <li><a href="/sakai/discussion" ng-click="setCid(course.COURSE_CLASS_ID)">Discussion</a></li>
-                                <li><a href="/sakai/announcement" ng-click="setCid(course.COURSE_CLASS_ID)">Announcements</a></li>
-                            </ul>
-                        </li>
+<body ng-app="admin" ng-controller="AdminMainController" class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+    <div class="wrapper" style="height: auto; min-height: 100%;">
+        <header class="main-header">
 
-                    </li>
-                </ul>
+            <!-- Logo -->
+            <a href="index2.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>A</b>LT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b>LTE</span>
+            </a>
+
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+            </nav>
+        </header>
+        <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="home-logo-text" href="#">Sakai</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                        <li class="avatar">
+                            <a href="#">
+                  {{full_name}}
+                  <img src="images/user_admin.png" class="user-img img-circle">
+                </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </nav> -->
+        <style type="text/css">
+        .nav-sidebar li span {
+            padding-left: 0px;
+            color: white;
+        }
+        </style>
+        <!-- <div class="row"> -->
+        <aside class="main-sidebar">
+        <!-- <div class="col-md-2 col-sm-3 sidebar" id="dashboard"> -->
+            <section class="sidebar" style="height: auto;">
+            <!-- <div class="cover" style="overflow-y: scroll;" id="sidebar"> -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="images/user_admin.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>Alexander Pierce</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <ul class="sidebar-menu tree">
+                    <li class="header">COURSES</li>
+
+                    <li ng-repeat="course in courses" ng-click="setCid(course.COURSE_CLASS_ID)" class="treeview">
+                        <a href="#pageSubmenu{{$index}}" data-toggle="collapse" aria-expanded="false">
+                            <i class="fa fa-book"></i>
+                            <span ng-bind="course.TITLE"></span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu" id="pageSubmenu{{$index}}">
+                            <li><a href="/sakai/resource" ng-click="setCid(course.COURSE_CLASS_ID)">Resource</a></li>
+                            <li><a href="/sakai/gradebook" ng-click="setCid(course.COURSE_CLASS_ID)">GradeBook</a></li>
+                            <li><a href="/sakai/assignment" ng-click="setCid(course.COURSE_CLASS_ID)">Assignment</a></li>
+                            <li><a href="/sakai/discussion" ng-click="setCid(course.COURSE_CLASS_ID)">Discussion</a></li>
+                            <li><a href="/sakai/announcement" ng-click="setCid(course.COURSE_CLASS_ID)">Announcements</a></li>
+                        </ul>
+                    </li>
+
+                    
+                </ul>
+            <!-- </div> -->
+            </section>
+        <!-- </div> -->
+        </aside>
+        <div class="content-wrapper" style="min-height: 1080px;">
+            <section class="content">
+                <div ng-view></div>
+            </section>
         </div>
-        <div ng-view></div>
+        <!-- </div> -->
     </div>
     <script src="../libs/angular/angular.min.js"></script>
     <script src="../libs/angular-route/angular-route.min.js"></script>
@@ -111,6 +152,16 @@
 
     <script src="../js/controllers/admin/adminAssignmentController.js"></script>
     <script src="../js/services/admin/AdminAssignmentService.js"></script>
+    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!---AdminLTE- -->
+    <script src="../js/adminlte.js"></script>
+    <script src="../js/adminlte.min.js"></script>
 
 </body>
 </html>

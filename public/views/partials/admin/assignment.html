@@ -1,98 +1,117 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+<div>
     <div class="main-content">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Created by</th>
-                    <th>Created at</th>
-                    <th>Start date</th>
-                    <th>Due date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="assignment in assignments" ng-click="setAssignmentId(assignment.ASSIGNMENT_ID)">
-                    <td ng-bind="assignment.TITLE"></td>
-                    <td ng-bind="assignment.NAME"></td>
-                    <td ng-bind="assignment.DATE_CREATED"></td>
-                    <td ng-bind="assignment.START_DATE"></td>
-                    <td ng-bind="assignment.DUE_DATE"></td>
-                    <td><a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a></td>
-                </tr>
-            </tbody>
-        </table>
 
-        <!---------- Announcement detail---------->
-        <div class="assignment-detail">
-            <ul>
-                <li>
-                    <span>Author:</span>
-                    <span ng-bind="assignment_detail.NAME"></span>
-                </li>
-                <li>
-                    <span>Title:</span>
-                    <span ng-bind="assignment_detail.TITLE"></span>
-                </li>
-                <li>
-                    <span>Content:</span>
-                    <span ng-bind="assignment_detail.DESCRIPTION"></span>
-                </li>
-                <li>
-                    <span>Created at:</span>
-                    <span ng-bind="assignment_detail.DATE_CREATED"></span>
-                </li>
-                <li>
-                    <span>Start date:</span>
-                    <span ng-bind="assignment_detail.START_DATE"></span>
-                </li>
-                <li>
-                    <span>Due date:</span>
-                    <span ng-bind="assignment_detail.DUE_DATE"></span>
-                </li>
-                <li>
-                    <span>Attachments:</span>
-                    <ul>
-                        <li ng-repeat="attachment in assignment_attachment">
-                            <a href="attachment.URL" ng-bind="attachment.NAME"></a>
-                        </tr>
-                    </ul>
-                </li>
-                <a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a>
-            </ul>
+            <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAssignmentModal">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
 
-        </div>
-
-        <!---------- Submission---------->
-        <div class="submission">
-            <div>Submission</div>
-            <ul>
-                <li>
-                    <span>Created at</span>
-                    <span ng-bind="submission.DATE_CREATED"></span>
-                </li>
-                <li>
-                    <span>Content:</span>
-                    <span ng-bind="submission.CONTENT"></span>
-                </li>
-                <li>
-                    <span>Attachments:</span>
-                    <ul>
-                        <li ng-repeat="sa in submission_attachment">
-                            <a href="sa.URL" ng-bind="sa.NAME"></a>
-                        </tr>
-                    </ul>
-                </li>
-                <a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a>
-            </ul>
-
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Assigment</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Created by</th>
+                                    <th>Created at</th>
+                                    <th>Start date</th>
+                                    <th>Due date</th>
+                                </tr>
+                                <tr ng-repeat="assignment in assignments" ng-click="setAssignmentId(assignment.ASSIGNMENT_ID)">
+                                    <td ng-bind="assignment.TITLE"></td>
+                                    <td ng-bind="assignment.NAME"></td>
+                                    <td ng-bind="assignment.DATE_CREATED"></td>
+                                    <td ng-bind="assignment.START_DATE"></td>
+                                    <td ng-bind="assignment.DUE_DATE"></td>
+                                    </td>
+                                    <td style="text-align: right">
+                                        <button type="button" class="btn btn-success btn-sm" >
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm">
+                                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
         </div>
     </div>
 
-        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newAssignmentModal">
-      Create new assignment
-    </button>
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked">
+            <li><a href="#"><label>Author: </label><br/><span ng-bind="assignment_detail.NAME"></span></a></li>
+            <li><a href="#"><label>Title: </label><br/><span ng-bind="assignment_detail.TITLE"></span></a></li>
+            <li><a href="#"><label>Desciprtion: </label><br/><span assignment_detail.DESCRIPTION></span></a></li>
+            <li><a href="#"><label>Created at: </label><br/><span ng-bind="assignment_detail.DESCRIPTION"></span>
+            <li><a href="#"><label>Start date: </label><br/><span ng-bind="assignment_detail.START_DATE"></span></a></li>
+            <li><a href="#"><label>Due date: </label><br/><span ng-bind="assignment_detail.DUE_DATE"></span></a></li>
+            <li>
+                <a href="#">
+                    <label>Attachments: </label>
+                    <br/>
+                     <span ng-if="assignment_attachment.length == 0">
+                        N/A
+                    </span>
+                </a>
+                <ul>
+                    <li ng-repeat="attachment in assignment_attachment">
+                        <a href="{{attachment.attURL}}" style="color: blue" target="_self" download="{{attachment.attNAME}}" ng-bind="attachment.NAME"></a>
+                    </li>
+                </ul>
+               
+            </li>
+        </ul>
+    </div>
 
+    <br>
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Submission</h3>
+        </div>
+        <div class="box-footer no-padding" ng-if="submission">
+            <ul class="nav nav-stacked">
+                <li><a href="#"><label>Created at: </label><br/><span ng-bind="submission.DATE_CREATED"></span></a></li>
+                <li><a href="#"><label>Content: </label><br/><span ng-bind="submission.CONTENT"></span></a></li>
+                <li>
+                    <a href="#">
+                        <label>Attachments: </label>
+                        <br/>
+                        <span ng-if="assignment_attachment.length == 0">
+                            N/A
+                        </span>
+                    </a>
+                    <ul>
+                        <li ng-repeat="sa in submission_attachment">
+                            <a href="{{sa.attURL}}" style="color: blue" target="_self" download="{{sa.attNAME}}" ng-bind="sa.NAME"></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="box-footer no-padding" ng-if="submission == null">
+            <ul class="nav nav-stacked">
+                <li><a href="#">No submission.</a></li>
+            </ul>
+        </div>
+    </div>
+
+    
     <!-- Modal -->
     <div class="modal fade" id="newAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="newAssignmentModalLabel">
         <div class="modal-dialog" role="document">

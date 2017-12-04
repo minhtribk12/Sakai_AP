@@ -1,62 +1,72 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+<div>
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal">
+        <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
+
     <div class="main-content">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Created by</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="announcement in announcements" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">
-                    <td ng-bind="announcement.TITLE"></td>
-                    <td ng-bind="announcement.NAME"></td>
-                    <td ng-bind="announcement.DATE_CREATED"></td>
-                    <td><a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a></td>
-                </tr>
-            </tbody>
-        </table>
 
-        <!---------- Announcement detail---------->
-        <div class="announcement-detail">
-            <ul>
-                <li>
-                    <span>Author:</span>
-                    <span ng-bind="announcement_detail.NAME"></span>
-                </li>
-                <li>
-                    <span>Title:</span>
-                    <span ng-bind="announcement_detail.TITLE"></span>
-                </li>
-                <li>
-                    <span>Content:</span>
-                    <span ng-bind="announcement_detail.CONTENT"></span>
-                </li>
-                <li>
-                    <span>Created at:</span>
-                    <span ng-bind="announcement_detail.DATE_CREATED"></span>
-                </li>
-                <li>
-                    <span>Attachments:</span>
-                    <ul>
-                        <li ng-repeat="attachment in announcement_attachment">
-                            <a href="attachment.URL" ng-bind="attachment.NAME"></a>
-                        </tr>
-                    </ul>
-                </li>
-                <a href="#" class="btn btn-effets btn-primary btn-sm"><span>Edit</span></a>
-            </ul>
-
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Announcements</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Created by</th>
+                                    <th>Date</th>
+                                </tr>
+                                <tr ng-repeat="announcement in announcements" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">
+                                    <td ng-bind="announcement.TITLE"></td>
+                                    <td ng-bind="announcement.NAME"></td>
+                                    <td ng-bind="announcement.DATE_CREATED"></td>
+                                    <td style="text-align: right">
+                                        <button type="button" class="btn btn-success btn-sm" >
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm">
+                                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
         </div>
     </div>
 
-    
-        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newAnnouncementModal">
-      Create new announcement
-    </button>
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked">
+            <li><a href="#"><label>Author: </label><br/><span ng-bind="announcement_detail.NAME"></span></a></li>
+            <li><a href="#"><label>Title: </label><br/><span ng-bind="announcement_detail.TITLE"></span></a></li>
+            <li><a href="#"><label>Content: </label><br/><span ng-bind="announcement_detail.CONTENT"></span></a></li>
+            <li><a href="#"><label>Created at: </label><br/><span ng-bind="announcement_detail.DATE_CREATED">842</span></a></li>
+            <li>
+                <a href="#">
+                    <label>Attachments: </label>
+                    <br/>
+                </a>
+                <ul>
+                    <li ng-repeat="attachment in announcement_attachment">
+                        <a href="{{attachment.attURL}}" style="color: blue" target="_self" download="{{attachment.attNAME}}" ng-bind="attachment.NAME"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
+    
     <!-- Modal -->
     <div class="modal fade" id="newAnnouncementModal" tabindex="-1" role="dialog" aria-labelledby="newAnnouncementModalLabel">
         <div class="modal-dialog" role="document">
