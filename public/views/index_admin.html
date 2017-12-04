@@ -50,7 +50,7 @@
                 <ul class="nav nav-sidebar">
                     <li>
                         <span>Courses</span>
-                        <li ng-repeat="course in courses">
+                        <li ng-repeat="course in courses" ng-click="setCid(course.COURSE_CLASS_ID)">
                             <a href="#pageSubmenu{{$index}}" class="head" data-toggle="collapse" aria-expanded="false">
                               <i class="fa fa-book"></i> <span ng-bind="course.TITLE"></span>                            </a>
                             <ul class="collapse list-unstyled" id="pageSubmenu{{$index}}">

@@ -1,13 +1,35 @@
 angular.module('adminGradeBookController', []).controller('AdminGradeBookController', function($scope, $rootScope, $route, md5, $window, $cookieStore, AdminGradeBook) {
 
     var user = $cookieStore.get('user') || null;
-    var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null };
+    var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
     $scope.jsonExcel = null;
     $scope.sheet = {};
 
     AdminGradeBook.getGradebook(cdata.cid, user.users_id).then(function(data) {
         $scope.gradebooks = data;
     })
+
+    /////////////////////////////////////////////////////////////For teachers
+    AdminGradeBook.getGradebookItems(cdata.cid).then(function(data) {
+        $scope.gradebook_items = data;
+        getGradebookItemDetail();
+    })
+
+    $scope.setGradebookItemId = function (id) {
+        $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': id});
+        getGradebookItemDetail();
+    }
+
+    function getGradebookItemDetail() {
+        cdata = $cookieStore.get('cdata');
+        AdminGradeBook.getGradebookItemDetail(cdata.gradebook_item_id, cdata.cid).then(function(data){
+            $scope.students = data;
+        })
+    }
+
+
+    /////////////////////////////////////////////////////////////
+
 
     $scope.setJson = function(val) {
         $scope.jsonExcel = JSON.parse(val);

@@ -1,7 +1,7 @@
 angular.module('adminAssignmentController', []).controller('AdminAssignmentController', function($scope,$rootScope, $route,md5, $window,$cookieStore, AdminAssignment) {
 
 	var user = $cookieStore.get('user') || null;
-	var cdata = $cookieStore.get('cdata') || {'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null};
+	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
 
 	function getAssignmentDetail() {
 		cdata = $cookieStore.get('cdata');
@@ -26,7 +26,7 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
 	})
 
 	$scope.setAssignmentId = function (id) {
-		$cookieStore.put('cdata', {'cid': id, 'announcement_id': cdata.announcement_id, 'assignment_id': id, 'discussion_id': cdata.discussion_id});
+		$cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': cdata.gradebook_item_id});
 		getAssignmentDetail();
     }
 

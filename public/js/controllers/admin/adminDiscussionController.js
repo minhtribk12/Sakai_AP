@@ -1,7 +1,7 @@
 angular.module('adminDiscussionController', []).controller('AdminDiscussionController', function($scope,$rootScope, $route,md5, $window,$cookieStore, AdminDiscussion) {
 
 	var user = $cookieStore.get('user') || null;
-	var cdata = $cookieStore.get('cdata') || {'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null};
+	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
 
 	AdminDiscussion.getDiscussion(cdata.cid, user).then(function(data){
 		$scope.discussions = data;
@@ -16,7 +16,7 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 	}
 
 	$scope.setDiscussionId = function (id) {
-		$cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': cdata.assignment_id, 'discussion_id': id});
+		$cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': cdata.assignment_id, 'discussion_id': id, 'gradebook_item_id': cdata.gradebook_item_id});
 		getDiscussionDetail();
     }
 

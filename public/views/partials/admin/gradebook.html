@@ -19,22 +19,53 @@
                 <button class="btn btn-app-sm" ng-click="submitPoint()" ng-if="ListData != null">Lưu dữ liệu</button>
             </p>
         </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Grade</th>
-                    <th>Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="gradebook in gradebooks">
-                    <td ng-bind="gradebook.TITLE"></td>
-                    <td ng-bind="gradebook.GRADE"></td>
-                    <td ng-bind="gradebook.NOTE"></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="for-student">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Grade</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="gradebook in gradebooks">
+                        <td ng-bind="gradebook.TITLE"></td>
+                        <td ng-bind="gradebook.GRADE"></td>
+                        <td ng-bind="gradebook.NOTE"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="for-teacher">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Gradebook items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in gradebook_items" ng-click="setGradebookItemId(item.GRADEBOOK_ITEM_ID)">
+                        <td ng-bind="item.TITLE"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="gradebook-item-detail">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Name</th>
+                        <th>Grade</th>  
+                        <th>Note</th>                           
+                    </tr>
+                    <tr ng-repeat="student in students">
+                        <td ng-bind="student.NAME"></td>
+                        <td ng-bind="student.GRADE ? student.GRADE : 'N/A'"></td>
+                        <td ng-bind="student.NOTE ? student.NOTE : 'N/A'"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <style>
         #drop {
             border: 2px dashed #bbb;
@@ -48,4 +79,5 @@
         }
         </style>
     </div>
+
 </div>
