@@ -1,49 +1,72 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+<div>
     <div class="main-content">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Topic</th>
-                    <th>Created by</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="discussion in discussions" ng-click="setDiscussionId(discussion.DISCUSSION_ID)">
-                    <td ng-bind="discussion.TOPIC"></td>
-                    <td ng-bind="discussion.NAME"></td>
-                    <td ng-bind="discussion.DATE_CREATED"></td>
-                </tr>
-            </tbody>
-        </table>
 
-        <!---------- Announcement detail---------->
-        <div class="discussion-detail">
-        	<div>Discussion detail</div>
-            <ul>
-            	<li ng-repeat="message in messages">
-                    <div> 
-                    	<span>Created by:</span>
-                    	<span ng-bind="message.NAME"></span>
-                    </div>       
-                    <div> 
-                    	<span>Created at:</span>
-                    	<span ng-bind="message.DATE_CREATED"></span>
-                    </div> 
-                    <div> 
-                    	<span>Content:</span>
-                    	<span ng-bind="message.CONTENT"></span>
-                    </div>                    
-                </li>
-            </ul>
-
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Discussions</h3>
+                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newDiscussionModal" style="float:right">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Created by</th>
+                                    <th>Date</th>
+                                </tr>
+                                <tr ng-repeat="discussion in discussions" ng-click="setDiscussionId(discussion.DISCUSSION_ID, discussion.TOPIC)">
+                                    <td ng-bind="discussion.TOPIC"></td>
+                                    <td ng-bind="discussion.NAME"></td>
+                                    <td ng-bind="discussion.DATE_CREATED"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
         </div>
     </div>
+    <div class="box box-success">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+            <i class="fa fa-comments-o"></i>
+            <h3 class="box-title" ng-bind="discussion_topic"></h3>
+        </div>
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
+            <div class="box-body chat" id="chat-box" style="overflow: hidden; width: auto; height: 250px;">
+                  <!-- chat item -->
+                <div class="item" ng-repeat="message in messages">
+                    <img src="images/user_admin.png" alt="user image" class="online">
 
-        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newDiscussionModal">
-      Create new discussion
-    </button>
+                    <p class="message">
+                        <a href="#" class="name">
+                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <span ng-bind="message.DATE_CREATED"></span></small>
+                            <span ng-bind="message.NAME"></span>
+                        </a>
+                        <span ng-bind="message.CONTENT"></span>  
+                    </p>
+                </div>
+            </div>
+            <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 29px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 184.911px;"></div>
+            <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+        </div>
+        <!-- /.chat -->
+        <div class="box-footer">
+            <div class="input-group">
+                <input class="form-control" placeholder="Type message...">
+
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="newDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="newDiscussionModalLabel">

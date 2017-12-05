@@ -1,7 +1,7 @@
 angular.module('adminGradeBookController', []).controller('AdminGradeBookController', function($scope, $rootScope, $route, md5, $window, $cookieStore, AdminGradeBook) {
 
     var user = $cookieStore.get('user') || null;
-    var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
+    var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
     $scope.jsonExcel = null;
     $scope.sheet = {};
     $scope.course_name = cdata.course_name;
@@ -17,7 +17,7 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
     })
 
     $scope.setGradebookItemId = function (id) {
-        $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': id});
+        $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher});
         getGradebookItemDetail();
     }
 

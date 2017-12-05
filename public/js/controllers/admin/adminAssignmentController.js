@@ -27,7 +27,7 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
     })
 
     $scope.setAssignmentId = function(id) {
-        $cookieStore.put('cdata', { 'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': cdata.gradebook_item_id });
+        $cookieStore.put('cdata', { 'cid': cdata.cid, 'announcement_id': cdata.announcement_id, 'assignment_id': id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': cdata.gradebook_item_id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher });
         getAssignmentDetail();
     }
 

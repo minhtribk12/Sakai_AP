@@ -17,5 +17,14 @@ module.exports = function (app) {
             res.json(data);
         })
     });
+
+    app.post('/api/admin/courses/teacher', function (req, res) {
+        var params = [req.body.user_id, req.body.course_id];
+        var sql = 'SELECT * FROM membership m WHERE m.users_id = ? AND m.course_class_id = ? AND m.role = \'teacher\'';
+
+        dao.query(sql, params, function(data){
+            res.json(data);
+        })
+    });
     
 };

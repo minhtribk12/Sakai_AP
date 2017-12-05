@@ -1,7 +1,7 @@
 angular.module('adminAnnouncementController', []).controller('AdminAnnouncementController', function($scope,$rootScope, $route,md5, $window,$cookieStore, AdminAnnouncement) {
 
 	var user = $cookieStore.get('user') || null;
-	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
+	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
 
 	function getAnnouncementDetail() {
 		cdata = $cookieStore.get('cdata');
@@ -19,7 +19,7 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
 	})
 
 	$scope.setAnnouncementId = function (id) {
-        $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': cdata.gradebook_item_id});
+        $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': cdata.gradebook_item_id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher});
 		getAnnouncementDetail();
     }
 
