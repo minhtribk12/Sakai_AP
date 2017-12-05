@@ -1,11 +1,15 @@
 <div>
+    <section class="content-header">
+        <h1>
+        {{course_name}}
+        <small>Assignment</small>
+      </h1>
+    </section>
     <div class="main-content">
-
-            <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAssignmentModal">
-          <span class="glyphicon glyphicon-plus"></span> Add
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAssignmentModal" ng-click="initNewAssignment()" style="float: right;margin-bottom: 10px;">
+            <span class="glyphicon glyphicon-plus"></span> Add
         </button>
-
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -30,64 +34,94 @@
                                     <td ng-bind="assignment.START_DATE | date: 'dd/MM/yyyy'" title="{{assignment.START_DATE | date: 'dd/MM/yyyy  HH:mm:ss'}}"></td>
                                     <td ng-bind="assignment.DUE_DATE | date: 'dd/MM/yyyy'" title="{{assignment.DUE_DATE | date: 'dd/MM/yyyy  HH:mm:ss'}}"></td>
                                     </td>
-                                    <td style="text-align: right">
-                                        <button type="button" class="btn btn-success btn-sm" >
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm">
-                                            <span class="glyphicon glyphicon-floppy-disk"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <!-- /.box-body -->
                 </div>
-            <!-- /.box -->
+                <!-- /.box -->
             </div>
         </div>
     </div>
-
-    <div class="box-footer no-padding">
+    <div class="box-footer no-padding" style="position: relative;">
+        <div style="position: absolute; right: 10px; top: 10px;z-index: 1" ng-if="assignment_detail != null">
+            <button type="button" class="btn btn-success btn-sm" ng-click="editAssignment(assignment_detail, assignment_attachment)" data-toggle="modal" data-target="#newAssignmentModal">
+                <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </div>
         <ul class="nav nav-stacked">
-            <li><a href="#"><label>Author: </label><br/><span ng-bind="assignment_detail.NAME"></span></a></li>
-            <li><a href="#"><label>Title: </label><br/><span ng-bind="assignment_detail.TITLE"></span></a></li>
-            <li><a href="#"><label>Desciprtion: </label><br/><span assignment_detail.DESCRIPTION></span></a></li>
-            <li><a href="#"><label>Created at: </label><br/><span ng-bind="assignment_detail.DESCRIPTION"></span>
-            <li><a href="#"><label>Start date: </label><br/><span ng-bind="assignment_detail.START_DATE"></span></a></li>
-            <li><a href="#"><label>Due date: </label><br/><span ng-bind="assignment_detail.DUE_DATE"></span></a></li>
             <li>
                 <a href="#">
-                    <label>Attachments: </label>
-                    <br/>
-                     <span ng-if="assignment_attachment.length == 0">
-                        N/A
-                    </span>
-                </a>
-                <ul>
-                    <li ng-repeat="attachment in assignment_attachment">
-                        <a href="{{attachment.attURL}}" style="color: blue" target="_self" download="{{attachment.attNAME}}" ng-bind="attachment.NAME"></a>
+                    <label>Author: </label>
+                    <br/><span ng-bind="assignment_detail.NAME"></span></a>
+            </li>
+            <li>
+                <a href="#">
+                    <label>Title: </label>
+                    <br/><span ng-bind="assignment_detail.TITLE"></span></a>
+            </li>
+            <li>
+                <a href="#">
+                    <label>Desciprtion: </label>
+                    <br/><span ng-bind="assignment_detail.DESCRIPTION"></span></a>
+            </li>
+            <li>
+                <a href="#">
+                    <label>Created at: </label>
+                    <br/><span ng-bind="assignment_detail.DATE_CREATED | date: 'dd/MM/yyyy HH:mm:ss'"></span>
+                    <li>
+                        <a href="#">
+                            <label>Start date: </label>
+                            <br/><span ng-bind="assignment_detail.START_DATE | date: 'dd/MM/yyyy  HH:mm:ss'"></span></a>
                     </li>
-                </ul>
-               
+                    <li>
+                        <a href="#">
+                            <label>Due date: </label>
+                            <br/><span ng-bind="assignment_detail.DUE_DATE | date: 'dd/MM/yyyy  HH:mm:ss'"></span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <label>Attachments: </label>
+                            <br/>
+                            <span ng-if="assignment_attachment.length == 0">N/A</span>
+                        </a>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="attachment in assignment_attachment">
+                                <a class="info-box" href="{{attachment.URL}}" style="color: blue" target="_self" download="{{attachment.NAME}}">
+                                    <span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-download-alt"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text" ng-bind="attachment.NAME"></span>
+                                        <span ng-bind="attachment.ATTACHMENT_DESCRIPTION" style="font-size: 12px;color: #333;"></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </a>
             </li>
         </ul>
     </div>
-
     <br>
-
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Submission</h3>
         </div>
         <div class="box-footer no-padding" ng-if="submission">
             <ul class="nav nav-stacked">
-                <li><a href="#"><label>Created at: </label><br/><span ng-bind="submission.DATE_CREATED"></span></a></li>
-                <li><a href="#"><label>Content: </label><br/><span ng-bind="submission.CONTENT"></span></a></li>
+                <li>
+                    <a href="#">
+                        <label>Created at: </label>
+                        <br/><span ng-bind="submission.DATE_CREATED"></span></a>
+                </li>
+                <li>
+                    <a href="#">
+                        <label>Content: </label>
+                        <br/><span ng-bind="submission.CONTENT"></span></a>
+                </li>
                 <li>
                     <a href="#">
                         <label>Attachments: </label>
@@ -110,15 +144,16 @@
             </ul>
         </div>
     </div>
-
-    
     <!-- Modal -->
     <div class="modal fade" id="newAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="newAssignmentModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="newAssignmentModalLabel" style="font-weight: bold;">Create a new assignment</h4>
+                    <h4 class="modal-title" id="newAssignmentModalLabel" style="font-weight: bold;">
+                        <span ng-if="assignment.ASSIGNMENT_ID == null">Create a new assignment</span>
+                        <span ng-if="assignment.ASSIGNMENT_ID != null">Edit assignment <span ng-bind="assignment.TITLE"></span></span>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <form id="assignment-form">
@@ -140,17 +175,22 @@
                         </div>
                         <div class="form-group">
                             <label for="assignment-file" class="control-label">Choose a file to upload</label>
-                            <input type="file" class="filestyle" data-icon="false" id="assignment-file" class="custom-file-input">                        
+                            <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
+                            <div class="input-group" style="width: 100%;  margin-bottom: 3px;" ng-repeat="resource in assignment.resources">
+                                <input type="text" ng-model="resource.AttNAME" id="AttNAME" readonly="readonly" class="form-control" style="width: 36%">
+                                <input type="text" ng-model="resource.DESCRIPTION" id="DESCRIPTION" maxlength="64" placeholder="A sort desciprtion" class="form-control" style="width: 56%">
+                                <button class="btn btn-danger btn-md"><span class="glyphicon glyphicon-trash"></span></button>
+                                <input type="text" ng-model="resource.ATTACHMENT_ID" style="display: none;">
+                            </div>
+                            <button class="btn btn-primary btn-md" onclick="$('#myfile').click()" style="float: right;"><span class="glyphicon glyphicon-cloud-upload"></span> Upload file</button>
                         </div>
-                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateAssignment(assignment)">Save</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateAssignment(assignment)" ng-if="assignment.TITLE != null && assignment.TITLE != ''">Save</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>

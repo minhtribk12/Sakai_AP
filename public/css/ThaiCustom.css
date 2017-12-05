@@ -20,3 +20,7 @@
     font: 20pt bold, "Vollkorn";
     color: #bbb
 }
+
+.no-hover > li > a:hover{
+    background: transparent !important;
+}

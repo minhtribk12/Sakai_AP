@@ -83,21 +83,63 @@ module.exports = function(app) {
         }
 
         if (req.body.fileUpdated.ASSIGNMENT_ID != null) {
-            params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ASSIGNMENT_ID];
-            sql = 'UPDATE assignment SET title = ?, description = ?, start_date = ?, due_date = ? WHERE assignment_id = ?';
+
+            sql = "DELETE FROM assignment_attachment WHERE ASSIGNMENT_ID = ? ; "
+            params = [req.body.fileUpdated.ASSIGNMENT_ID];
+            dao.query(sql, params, function(data) {
+                params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.START_DATE, req.body.fileUpdated.DUE_DATE, req.body.fileUpdated.ASSIGNMENT_ID];
+                sql = 'UPDATE assignment SET title = ?, description = ?, start_date = ?, due_date = ? WHERE assignment_id = ? ; ';
+                dao.query(sql, params, function(data) {
+                    var resources = req.body.fileUpdated.resources;
+                    sql = '';
+                    params = [];
+                    if (resources) {
+                        resources.map(function(resource) {
+                            sql += "INSERT INTO assignment_attachment (ASSIGNMENT_ID, ATTACHMENT_ID, ATTACHMENT_DESCRIPTION) VALUES (? , ?, ?); "
+                            params.push(req.body.fileUpdated.ASSIGNMENT_ID);
+                            params.push(resource.ATTACHMENT_ID);
+                            params.push(resource.DESCRIPTION);
+                        })
+                    }
+                    dao.query(sql, params, function(data) {
+                        if (data != null || data != undefined) {
+                            res.send(true);
+                        } else {
+                            res.send(false);
+                        }
+                    })
+                })
+
+            })
+
         } else {
             params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.user.users_id, req.body.fileUpdated.TITLE, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.START_DATE, req.body.fileUpdated.DUE_DATE];
-            sql = 'INSERT INTO assignment(course_class_id, users_id, title, description, start_date, due_date, date_created) VALUES(?, ?, ?, ?, ?, ?, NOW())';
-            //TODO: upload files, create attachments
+            sql = 'INSERT INTO assignment(course_class_id, users_id, title, description, start_date, due_date, date_created) VALUES(?, ?, ?, ?, ?, ?, NOW()); ';
+            dao.query(sql, params, function(data) {
+
+                params = [];
+                sql = '';
+                var resources = req.body.fileUpdated.resources;
+                if (resources) {
+                    resources.map(function(resource) {
+                        sql += "INSERT INTO assignment_attachment (ASSIGNMENT_ID, ATTACHMENT_ID, ATTACHMENT_DESCRIPTION) VALUES (? , ?, ?); "
+                        params.push(data.insertId);
+                        params.push(resource.ATTACHMENT_ID);
+                        params.push(resource.DESCRIPTION);
+                    })
+                }
+
+
+                dao.query(sql, params, function(data) {
+                    if (data != null || data != undefined) {
+                        res.send(true);
+                    } else {
+                        res.send(false);
+                    }
+                })
+            });
         }
 
-        dao.query(sql, params, function(data) {
-            if (data != null) {
-                res.send(true);
-            } else {
-                res.send(false);
-            }
-        })
     });
 
 }
