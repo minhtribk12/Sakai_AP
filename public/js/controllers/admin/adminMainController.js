@@ -35,7 +35,7 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
             $scope.cid = id;
             $scope.name = name;
             $cookieStore.remove('cdata');
-            $cookieStore.put('cdata', {'cid': id, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': data});
+            $cookieStore.put('cdata', {'cid': id, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': index, 'course_name': name, 'is_teacher': data});
         })    
     }
 });
