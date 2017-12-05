@@ -23,12 +23,12 @@
                                     <th>Start date</th>
                                     <th>Due date</th>
                                 </tr>
-                                <tr ng-repeat="assignment in assignments" ng-click="setAssignmentId(assignment.ASSIGNMENT_ID)">
+                                <tr ng-repeat="assignment in assignments" ng-click="setAssignmentId(assignment.ASSIGNMENT_ID)" style="cursor: pointer;">
                                     <td ng-bind="assignment.TITLE"></td>
                                     <td ng-bind="assignment.NAME"></td>
-                                    <td ng-bind="assignment.DATE_CREATED"></td>
-                                    <td ng-bind="assignment.START_DATE"></td>
-                                    <td ng-bind="assignment.DUE_DATE"></td>
+                                    <td ng-bind="assignment.DATE_CREATED | date: 'dd/MM/yyyy'" title="{{assignment.DATE_CREATED | date: 'dd/MM/yyyy  HH:mm:ss'}}"></td>
+                                    <td ng-bind="assignment.START_DATE | date: 'dd/MM/yyyy'" title="{{assignment.START_DATE | date: 'dd/MM/yyyy  HH:mm:ss'}}"></td>
+                                    <td ng-bind="assignment.DUE_DATE | date: 'dd/MM/yyyy'" title="{{assignment.DUE_DATE | date: 'dd/MM/yyyy  HH:mm:ss'}}"></td>
                                     </td>
                                     <td style="text-align: right">
                                         <button type="button" class="btn btn-success btn-sm" >

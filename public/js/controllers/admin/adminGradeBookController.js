@@ -4,6 +4,7 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
     var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
     $scope.jsonExcel = null;
     $scope.sheet = {};
+    $scope.course_name = cdata.course_name;
 
     AdminGradeBook.getGradebook(cdata.cid, user.users_id).then(function(data) {
         $scope.gradebooks = data;
