@@ -2,6 +2,7 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
 
     var user = $cookieStore.get('user') || null;
     var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null};
+    $scope.course_name = cdata.course_name;
 
 
     loadData();
@@ -60,8 +61,9 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
             success: function(data) {
                 $scope.resource.AttNAME = data.originalname;
                 $scope.resource.ATTACHMENT_ID = data.insertId;
-
                 $('#myfile').val(null);
+                $('#AttNAME').val(data.originalname);
+                 $scope.$apply();
             }
         });
     }
@@ -72,5 +74,11 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
             $scope.files = data;
             $scope.editting = "";
         });
+    }
+
+    $scope.valid = function() {
+        return $scope.resource != undefined 
+                && $scope.resource.ATTACHMENT_ID != undefined && $scope.resource.ATTACHMENT_ID != ''
+                && $scope.resource.NAME != undefined && $scope.resource.NAME != ''
     }
 });

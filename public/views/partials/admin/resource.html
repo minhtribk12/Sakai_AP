@@ -1,10 +1,14 @@
-
 <div>
-        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}">
+    <section class="content-header">
+        <h1>
+        {{course_name}}
+        <small>Resource</small>
+      </h1>
+    </section>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;margin-bottom: 10px;">
         <span class="glyphicon glyphicon-plus"></span> Add
     </button>
-
     <div class="main-content">
         <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
         <div class="row">
@@ -48,12 +52,10 @@
                     </div>
                     <!-- /.box-body -->
                 </div>
-            <!-- /.box -->
+                <!-- /.box -->
             </div>
         </div>
     </div>
-    
-
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -74,22 +76,19 @@
                         </div>
                         <div class="form-group">
                             <label for="resource-file" class="control-label">Choose a resource file to upload</label>
-                            <button class="btn btn-primary btn-sm" onclick="$('#myfile').click()"><span class="glyphicon glyphicon-cloud-upload">Upload</span></button>
-                            <input type="text" ng-model="resource.AttNAME">
+                            <div class="input-group" style="width: 100%">
+                                <input type="text" ng-model="resource.AttNAME" id="AttNAME" readonly="readonly" class="form-control" style="width: 92%">
+                                <button class="btn btn-primary btn-md" onclick="$('#myfile').click()"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                            </div>
                             <input type="text" ng-model="resource.ATTACHMENT_ID" style="display: none;">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateResource(resource)">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close {{valid()}}</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateResource(resource)" ng-if="valid()">Save</button>
                 </div>
             </div>
         </div>
-
-
-
     </div>
-
 </div>
-

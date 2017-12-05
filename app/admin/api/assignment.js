@@ -82,7 +82,6 @@ module.exports = function(app) {
             req.body.fileUpdated.DUE_DATE = new Date(Date.parse(req.body.fileUpdated.DUE_DATE))
         }
 
-        console.log(req.body)
         if (req.body.fileUpdated.ASSIGNMENT_ID != null) {
             params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ASSIGNMENT_ID];
             sql = 'UPDATE assignment SET title = ?, description = ?, start_date = ?, due_date = ? WHERE assignment_id = ?';

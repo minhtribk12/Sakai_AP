@@ -15,8 +15,6 @@ module.exports = function(app) {
         var params;
         var sql;
 
-        console.log(req.body)
-
         if (req.body.fileUpdated.RESOURCES_ID != null) {
             params = [req.body.fileUpdated.NAME, req.body.fileUpdated.DESCRIPTION, req.body.fileUpdated.ATTACHMENT_ID, req.body.fileUpdated.RESOURCES_ID];
             sql = 'UPDATE resources SET name = ?, description = ?, attachment_id = ? WHERE resources_id = ?';
@@ -38,8 +36,6 @@ module.exports = function(app) {
         var params = [req.body.resId];
         var sql = 'DELETE FROM resources WHERE RESOURCES_ID = ?';
 
-        console.log(sql)
-        console.log(req.body)
         dao.query(sql, params, function(data){ // uncomment it
             res.send(true); //mean: delete success
         })

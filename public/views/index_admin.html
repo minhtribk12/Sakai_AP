@@ -32,35 +32,21 @@
             <nav class="navbar navbar-static-top">
             </nav>
         </header>
-        <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="home-logo-text" href="#">Sakai</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
-                        <li class="avatar">
-                            <a href="#">
-                  {{full_name}}
-                  <img src="images/user_admin.png" class="user-img img-circle">
-                </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> -->
         <style type="text/css">
-        .nav-sidebar li span {
-            padding-left: 0px;
-            color: white;
-        }
+            .nav-sidebar li span {
+                padding-left: 0px;
+                color: white;
+            }
+
+            #menu{{cid}}-{{menu_index}} {
+                color: #fafafa;
+            }
+
+            #menu{{cid}} {
+                color: #fafafa;
+                border-left: 3px solid #3c8dbc;
+            }
+
         </style>
         <!-- <div class="row"> -->
         <aside class="main-sidebar">
@@ -79,20 +65,20 @@
                 <ul class="sidebar-menu tree">
                     <li class="header">COURSES</li>
 
-                    <li ng-repeat="course in courses" ng-click="setCid(course.COURSE_CLASS_ID)" class="treeview">
-                        <a href="#pageSubmenu{{$index}}" data-toggle="collapse" aria-expanded="false">
+                    <li ng-repeat="course in courses" class="treeview" ng-init="course.temp.e = false" >
+                        <a ng-click="course.temp.e = !course.temp.e ;" style="cursor: pointer;" id="menu{{course.COURSE_CLASS_ID}}" ng-click="setCid(course.COURSE_CLASS_ID, -1, course.TITLE)">
                             <i class="fa fa-book"></i>
                             <span ng-bind="course.TITLE"></span>
                             <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
+                                <i class="fa {{ course.temp.e ? 'fa-angle-left' : 'fa-angle-down'}} pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu" id="pageSubmenu{{$index}}">
-                            <li><a href="/sakai/resource" ng-click="setCid(course.COURSE_CLASS_ID)">Resource</a></li>
-                            <li><a href="/sakai/gradebook" ng-click="setCid(course.COURSE_CLASS_ID)">GradeBook</a></li>
-                            <li><a href="/sakai/assignment" ng-click="setCid(course.COURSE_CLASS_ID)">Assignment</a></li>
-                            <li><a href="/sakai/discussion" ng-click="setCid(course.COURSE_CLASS_ID)">Discussion</a></li>
-                            <li><a href="/sakai/announcement" ng-click="setCid(course.COURSE_CLASS_ID)">Announcements</a></li>
+                        <ul class="treeview-menu collapse slow {{course.temp.e || cid == course.COURSE_CLASS_ID ? 'in' : ''}}">
+                            <li><a href="/sakai/resource" id="menu{{course.COURSE_CLASS_ID}}-0" ng-click="setCid(course.COURSE_CLASS_ID, 0, course.TITLE)">Resource</a></li>
+                            <li><a href="/sakai/gradebook" id="menu{{course.COURSE_CLASS_ID}}-1" ng-click="setCid(course.COURSE_CLASS_ID, 1, course.TITLE)">GradeBook</a></li>
+                            <li><a href="/sakai/assignment" id="menu{{course.COURSE_CLASS_ID}}-2" ng-click="setCid(course.COURSE_CLASS_ID, 2, course.TITLE)">Assignment</a></li>
+                            <li><a href="/sakai/discussion" id="menu{{course.COURSE_CLASS_ID}}-3" ng-click="setCid(course.COURSE_CLASS_ID, 3, course.TITLE)">Discussion</a></li>
+                            <li><a href="/sakai/announcement" id="menu{{course.COURSE_CLASS_ID}}-4" ng-click="setCid(course.COURSE_CLASS_ID, 4, course.TITLE)">Announcements</a></li>
                         </ul>
                     </li>
 

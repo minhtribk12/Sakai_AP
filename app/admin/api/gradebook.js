@@ -30,8 +30,6 @@ module.exports = function(app) {
             var params = [req.body.cid];
 
             dao.query(sql, params, function(data) {
-                console.log(req.body.cid)
-                console.log(data)
                 res.json(data);
             })
         }
