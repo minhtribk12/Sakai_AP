@@ -278,7 +278,12 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
                         wb = X.read(data, { type: 'binary' });
                     } else {
                         var arr = fixdata(data);
-                        wb = X.read(btoa(arr), { type: 'base64' });
+                        try {
+                           wb = X.read(btoa(arr), { type: 'base64' });
+                        } catch (e) {
+                            alert('Unsupported File');
+                            return;
+                        }
                     }
                     process_wb(wb);
                 }

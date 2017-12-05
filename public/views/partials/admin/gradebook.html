@@ -1,24 +1,15 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+<div>
+    <section class="content-header">
+        <h1>
+        {{course_name}}
+        <small>Grade book</small>
+      </h1>
+    </section>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;margin-bottom: 10px;">
+        <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
     <div class="main-content">
-        <div style="padding: 10px">
-            <div id="drop">Kéo file vào đây</div>
-            <p style="margin-top: 10px;">Hoặc là chọn file
-                <select name="format" style="display: none">
-                    <option value="csv"> CSV</option>
-                    <option value="json" selected> JSON</option>
-                    <option value="form"> FORMULAE</option>
-                </select>
-                <input type="checkbox" name="useworker" style="display: none" />
-                <input type="checkbox" name="xferable" style="display: none" />
-                <input type="checkbox" name="userabs" style="display: none" />
-                <input class="form-control file-upload" type="file" name="xlfile" id="xlf" style="display: inline;" />
-                <select class="form-control" ng-model="sheet.name" ng-if="jsonExcel != null" ng-change="choiceSheet()">
-                    <option value="" selected disabled>-- Choice Sheet --</option>
-                    <option ng-repeat="(key, val) in jsonExcel track by $index" value="{{key}}">{{key}}</option>
-                </select>
-                <button class="btn btn-app-sm" ng-click="submitPoint()" ng-if="ListData != null">Lưu dữ liệu</button>
-            </p>
-        </div>
         <div class="for-student">
             <table class="table table-hover">
                 <thead>
@@ -50,13 +41,12 @@
                     </tr>
                 </tbody>
             </table>
-
             <div class="gradebook-item-detail">
                 <table class="table table-hover">
                     <tr>
                         <th>Name</th>
-                        <th>Grade</th>  
-                        <th>Note</th>                           
+                        <th>Grade</th>
+                        <th>Note</th>
                     </tr>
                     <tr ng-repeat="student in students">
                         <td ng-bind="student.NAME"></td>
@@ -66,18 +56,42 @@
                 </table>
             </div>
         </div>
-        <style>
-        #drop {
-            border: 2px dashed #bbb;
-            -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-            padding: 49px;
-            text-align: center;
-            font: 20pt bold, "Vollkorn";
-            color: #bbb
-        }
-        </style>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold;">Insert points</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="padding: 10px">
+                            <div id="drop">Drop your file here</div>
+                            <p style="margin-top: 10px;">Or browser your file
+                                <select name="format" style="display: none">
+                                    <option value="csv"> CSV</option>
+                                    <option value="json" selected> JSON</option>
+                                    <option value="form"> FORMULAE</option>
+                                </select>
+                                <input type="checkbox" name="useworker" style="display: none" />
+                                <input type="checkbox" name="xferable" style="display: none" />
+                                <input type="checkbox" name="userabs" style="display: none" />
+                                <input class="form-control file-upload" type="file" name="xlfile" id="xlf" style="display: inline;" />
+                                <select class="form-control" ng-model="sheet.name" ng-if="jsonExcel != null" style="margin-top: 10px;" ng-change="choiceSheet()">
+                                    <option value="" selected disabled>-- Choice Sheet --</option>
+                                    <option ng-repeat="(key, val) in jsonExcel track by $index" value="{{key}}">{{key}}</option>
+                                </select>
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/input-point-example.xlsx" target="_self" class="btn btn-effets btn-primary btn-sm" download="input-point-example.xlsx"><span class="glyphicon glyphicon-download-alt"></span> Example file</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-app-sm" data-dismiss="modal" ng-click="submitPoint()" ng-if="ListData != null">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>

@@ -12,6 +12,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="../css/admin.css">
     <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
      --><link rel="stylesheet" type="text/css" href="../css/AdminLTE.css">
+     <link rel="stylesheet" type="text/css" href="../css/ThaiCustom.css">
     <link rel="stylesheet" type="text/css" href="../css/AdminLTE.min.css">
     <link rel="stylesheet" href="../css/skins/_all-skins.min.css">
 </head>
@@ -30,6 +31,13 @@
 
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+              <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
             </nav>
         </header>
         <style type="text/css">
@@ -70,7 +78,7 @@
                             <i class="fa fa-book"></i>
                             <span ng-bind="course.TITLE"></span>
                             <span class="pull-right-container">
-                                <i class="fa {{ course.temp.e ? 'fa-angle-left' : 'fa-angle-down'}} pull-right"></i>
+                                <i class="fa {{ course.temp.e || cid == course.COURSE_CLASS_ID ? 'fa-angle-left' : 'fa-angle-down'}} pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu collapse slow {{course.temp.e || cid == course.COURSE_CLASS_ID ? 'in' : ''}}">
@@ -115,6 +123,7 @@
     <script src="../libs/ng-table/dist/ng-table.min.js"></script>
     <script src="../libs/angular-md5/angular-md5.js"></script>
     <script src="../libs/ng-tags-input/ng-tags-input.js"></script>
+    <script src="../js/adminlte.js"></script>
     <script src="../js/appAdminRoutes.js"></script>
     <script src="../js/filters.js"></script>
     <script src="../js/directives/appDirectives.js"></script>
