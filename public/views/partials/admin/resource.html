@@ -5,10 +5,7 @@
         <small>Resource</small>
       </h1>
     </section>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;margin-bottom: 10px;">
-        <span class="glyphicon glyphicon-plus"></span> Add
-    </button>
+    
     <div class="main-content">
         <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
         <div class="row">
@@ -16,6 +13,10 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Course resources</h3>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">

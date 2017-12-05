@@ -5,10 +5,7 @@
         <small>Grade book</small>
       </h1>
     </section>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;margin-bottom: 10px;">
-        <span class="glyphicon glyphicon-plus"></span> Add
-    </button>
+   
 
     <div class="main-content">
 
@@ -17,6 +14,10 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Gradebook</h3>
+                         <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
@@ -58,6 +59,11 @@
                         </table>
                     </div>
                     <!-- /.box-body -->
+                    <div class="box-footer no-padding" ng-if="gradebook_items.length < 1">
+                        <ul class="nav nav-stacked">
+                            <li><a href="#">No grade item found.</a></li>
+                        </ul>
+                    </div>
                 </div>
             <!-- /.box -->
             </div>

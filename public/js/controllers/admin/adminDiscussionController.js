@@ -15,8 +15,8 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 		})
 	}
 
-	$scope.setDiscussionId = function (id) {
-		$cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': id, 'gradebook_item_id': cdata.gradebook_item_id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher});
+	$scope.setDiscussionId = function (id, topic) {
+        $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': id, 'gradebook_item_id': cdata.gradebook_item_id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher});
 		getDiscussionDetail();
     }
 
