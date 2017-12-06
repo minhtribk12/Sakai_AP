@@ -2,80 +2,57 @@
     <section class="content-header" style="margin-bottom: 10px;">
         <h1>
         {{course_name}}
+        <small>Gradebook</small>
+         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right; padding-bottom: 10px">
+            <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
       </h1>
+
     </section>
-   
-
+    <!-- Student view -->
     <div class="main-content">
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Gradebook</h3>
-                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;">
-                            <span class="glyphicon glyphicon-plus"></span> Add
-                        </button>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Grade</th>
-                                    <th>Note</th>
-                                </tr>
-                                <tr ng-repeat="gradebook in gradebooks">
-                                    <td ng-bind="gradebook.TITLE"></td>
-                                    <td ng-bind="gradebook.GRADE"></td>
-                                    <td ng-bind="gradebook.NOTE"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            <!-- /.box -->
+        <div class="row" style="margin-top: 40px">
+            <div class="col-xs-6 col-md-3 text-center" ng-repeat="gradebook in gradebooks" on-finish-render="ngRepeatFinished" title="{{gradebook.NOTE}}">
+                <input type="text" class="knob" value="{{gradebook.GRADE * 10}}" data-skin="tron" data-thickness="0.2" data-width="180" data-height="180" data-fgColor="#3c8dbc" data-readonly="true">
+                <div class="knob-label" ng-bind="gradebook.TITLE"></div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Gradebook items</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr ng-repeat="item in gradebook_items" ng-click="setGradebookItemId(item.GRADEBOOK_ITEM_ID)">
-                                    <td style="font-weight: bold;" ng-bind="item.TITLE"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer no-padding" ng-if="gradebook_items.length < 1">
-                        <ul class="nav nav-stacked">
-                            <li><a href="#">No grade item found.</a></li>
-                        </ul>
-                    </div>
+    </div>
+    <!-- Admin view -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Gradebook items</h3>
                 </div>
-            <!-- /.box -->
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr ng-repeat="item in gradebook_items" ng-click="setGradebookItemId(item.GRADEBOOK_ITEM_ID)">
+                                <td style="font-weight: bold;" ng-bind="item.TITLE"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer no-padding" ng-if="gradebook_items.length < 1">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">No grade item found.</a></li>
+                    </ul>
+                </div>
             </div>
+            <!-- /.box -->
         </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
                                 <th>Name</th>
                                 <th>Grade</th>
                                 <th>Note</th>
@@ -85,51 +62,49 @@
                                 <td ng-bind="student.GRADE ? student.GRADE : 'N/A'"></td>
                                 <td ng-bind="student.NOTE ? student.NOTE : 'N/A'"></td>
                             </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
+                        </tbody>
+                    </table>
                 </div>
-            <!-- /.box -->
+                <!-- /.box-body -->
             </div>
+            <!-- /.box -->
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold;">Insert points</h4>
+    </div>
+    <!-- Input grade view -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" style="font-weight: bold;">Insert points</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="padding: 10px">
+                        <div id="drop">Drop your file here</div>
+                        <p style="margin-top: 10px;">Or browser your file
+                            <select name="format" style="display: none">
+                                <option value="csv"> CSV</option>
+                                <option value="json" selected> JSON</option>
+                                <option value="form"> FORMULAE</option>
+                            </select>
+                            <input type="checkbox" name="useworker" style="display: none" />
+                            <input type="checkbox" name="xferable" style="display: none" />
+                            <input type="checkbox" name="userabs" style="display: none" />
+                            <input class="form-control file-upload" type="file" name="xlfile" id="xlf" style="display: inline;" />
+                            <select class="form-control" ng-model="sheet.name" ng-if="jsonExcel != null" style="margin-top: 10px;" ng-change="choiceSheet()">
+                                <option value="" selected disabled>-- Choice Sheet --</option>
+                                <option ng-repeat="(key, val) in jsonExcel track by $index" value="{{key}}">{{key}}</option>
+                            </select>
+                        </p>
                     </div>
-                    <div class="modal-body">
-                        <div style="padding: 10px">
-                            <div id="drop">Drop your file here</div>
-                            <p style="margin-top: 10px;">Or browser your file
-                                <select name="format" style="display: none">
-                                    <option value="csv"> CSV</option>
-                                    <option value="json" selected> JSON</option>
-                                    <option value="form"> FORMULAE</option>
-                                </select>
-                                <input type="checkbox" name="useworker" style="display: none" />
-                                <input type="checkbox" name="xferable" style="display: none" />
-                                <input type="checkbox" name="userabs" style="display: none" />
-                                <input class="form-control file-upload" type="file" name="xlfile" id="xlf" style="display: inline;" />
-                                <select class="form-control" ng-model="sheet.name" ng-if="jsonExcel != null" style="margin-top: 10px;" ng-change="choiceSheet()">
-                                    <option value="" selected disabled>-- Choice Sheet --</option>
-                                    <option ng-repeat="(key, val) in jsonExcel track by $index" value="{{key}}">{{key}}</option>
-                                </select>
-                                
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="/input-point-example.xlsx" target="_self" class="btn btn-effets btn-primary btn-sm" download="input-point-example.xlsx"><span class="glyphicon glyphicon-download-alt"></span> Example file</a>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button class="btn btn-app-sm" data-dismiss="modal" ng-click="submitPoint()" ng-if="ListData != null">Submit</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/input-point-example.xlsx" target="_self" class="btn btn-effets btn-primary btn-sm" download="input-point-example.xlsx"><span class="glyphicon glyphicon-download-alt"></span> Example file</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-app-sm" data-dismiss="modal" ng-click="submitPoint()" ng-if="ListData != null">Submit</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

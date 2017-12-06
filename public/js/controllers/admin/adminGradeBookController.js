@@ -28,6 +28,9 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
         })
     }
 
+    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+       drawChart();
+    });
 
     /////////////////////////////////////////////////////////////
 
