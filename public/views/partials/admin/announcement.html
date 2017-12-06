@@ -19,7 +19,7 @@
                     <span class="glyphicon glyphicon-plus"></span> Add
                 </button>
                 <!-- The time line -->
-                <ul class="timeline" ng-repeat="time in timeline">
+                <ul class="timeline" ng-repeat="time in timeline" style="margin-top: 30px;">
                     <li class="time-label">
                         <span class="bg-red" ng-bind="time.date |  date: 'dd MMM. yyyy'" style="font-size: 11px;" />
                     </li>
@@ -69,7 +69,7 @@
                             <br/>
                         </a>
                         <div class="row">
-                            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="attachment in announcement_attachment">
+                            <div class="col-lg- col-sm-6 col-xs-12" ng-repeat="attachment in announcement_attachment">
                                 <a class="info-box" href="{{attachment.URL}}" style="color: blue" target="_self" download="{{attachment.NAME}}">
                                     <span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-download-alt"></i></span>
                                     <div class="info-box-content">
