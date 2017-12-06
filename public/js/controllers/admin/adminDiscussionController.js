@@ -2,6 +2,7 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 
 	var user = $cookieStore.get('user') || null;
 	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
+    $scope.course_name = cdata.course_name;
 
 	AdminDiscussion.getDiscussion(cdata.cid, user).then(function(data){
 		$scope.discussions = data;

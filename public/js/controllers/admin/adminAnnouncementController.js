@@ -2,7 +2,8 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
 
 	var user = $cookieStore.get('user') || null;
 	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
-
+    $scope.course_name = cdata.course_name;
+    
 	function getAnnouncementDetail() {
 		cdata = $cookieStore.get('cdata');
 		AdminAnnouncement.getAnnouncementDetail(cdata.announcement_id).then(function(data){
@@ -15,6 +16,23 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
 
 	AdminAnnouncement.getAnnouncement(cdata.cid, user).then(function(data){
 		$scope.announcements = data;
+        $scope.timeline = [];
+
+        var tempObj = {};
+
+        data.map(function(d) {
+            var tDate = new Date(d.DATE_CREATED);
+            var key = tDate.toLocaleDateString();
+            if (!tempObj[key]) {
+                tempObj[key] = [];
+            }
+            tempObj[key].push(d);
+        })
+
+        for (k in tempObj) {
+            $scope.timeline.push({date: new Date(k), announcements: tempObj[k]});
+        }
+
 		getAnnouncementDetail();
 	})
 
@@ -39,4 +57,6 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
             }
         })
     }
+
+    $scope.maxheight = window.innerHeight - 140 + "px";
 });

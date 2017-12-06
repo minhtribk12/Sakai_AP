@@ -1,72 +1,92 @@
+<style type="text/css">
+    .max-height-full {
+        overflow-y: scroll;
+        max-height: {{maxheight}};
+    }
+</style>
 <div>
-
+    <section class="content-header" style="margin-bottom: 10px;">
+        <h1>
+        {{course_name}}
+        <small>Announcements</small>
+      </h1>
+    </section>
+    
     <div class="main-content">
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Announcements</h3>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal" style="float:right">
-                            <span class="glyphicon glyphicon-plus"></span> Add
-                        </button>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Created by</th>
-                                    <th>Date</th>
-                                    <th></th>
-                                </tr>
-                                <tr ng-repeat="announcement in announcements" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">
-                                    <td ng-bind="announcement.TITLE"></td>
-                                    <td ng-bind="announcement.NAME"></td>
-                                    <td ng-bind="announcement.DATE_CREATED"></td>
-                                    <td style="text-align: right">
-                                        <button type="button" class="btn btn-success btn-sm" >
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm">
-                                            <span class="glyphicon glyphicon-floppy-disk"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            <!-- /.box -->
+            <div class="col-xs-12 col-md-{{announcement_detail == null ? '12' : '4'}} max-height-full scroll">
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal" style="float:right">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </button>
+                <!-- The time line -->
+                <ul class="timeline" ng-repeat="time in timeline">
+                    <li class="time-label">
+                        <span class="bg-red" ng-bind="time.date |  date: 'dd MMM. yyyy'" style="font-size: 11px;" />
+                    </li>
+                    <li ng-repeat="announcement in time.announcements" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">
+                        <i class="fa fa-bullhorn bg-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fa fa-clock-o"></i> <span ng-bind="time.date |  date: 'HH:mm'"></span></span>
+                            <h3 class="timeline-header"><a href="#"><span ng-bind="announcement.NAME"></span></a> posted an announcement</h3>
+                            <div class="timeline-body">
+                                <h4 ng-bind="announcement.TITLE"></h4>
+                                <span ng-bind="announcement_detail.CONTENT" class="demo-detail"> </span>
+                            </div>
+                            <div class="timeline-footer">
+                                <a class="btn btn-primary btn-xs" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">Read more</a>
+                                <a class="btn btn-success btn-xs">Edit</a>
+                                <a class="btn btn-danger btn-xs">Delete</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-8" style="{{announcement_detail == null ? 'display: none' : '';}}">
+                <ul class="nav nav-stacked">
+                    <li>
+                        <a href="#">
+                            <label>Author: </label>
+                            <br/><span ng-bind="announcement_detail.NAME"></span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <label>Title: </label>
+                            <br/><span ng-bind="announcement_detail.TITLE"></span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <label>Content: </label>
+                            <br/><span ng-bind="announcement_detail.CONTENT"></span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <label>Created at: </label>
+                            <br/><span ng-bind="announcement_detail.DATE_CREATED | date: 'dd/MM/yyyy HH:mm:ss'"></span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <label>Attachments: </label>
+                            <br/>
+                        </a>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="attachment in announcement_attachment">
+                                <a class="info-box" href="{{attachment.URL}}" style="color: blue" target="_self" download="{{attachment.NAME}}">
+                                    <span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-download-alt"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text" ng-bind="attachment.NAME"></span>
+                                        <span ng-bind="attachment.ATTACHMENT_DESCRIPTION" style="font-size: 12px;color: #333;"></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <button class="btn btn-danger btn-md pull-right" ng-click="announcement_detail = null"><i class="fa fa-times-circle"></i> Close</button>
+
             </div>
         </div>
     </div>
-
-    <div class="box-footer no-padding">
-        <ul class="nav nav-stacked">
-            <li><a href="#"><label>Author: </label><br/><span ng-bind="announcement_detail.NAME"></span></a></li>
-            <li><a href="#"><label>Title: </label><br/><span ng-bind="announcement_detail.TITLE"></span></a></li>
-            <li><a href="#"><label>Content: </label><br/><span ng-bind="announcement_detail.CONTENT"></span></a></li>
-            <li><a href="#"><label>Created at: </label><br/><span ng-bind="announcement_detail.DATE_CREATED">842</span></a></li>
-            <li>
-                <a href="#">
-                    <label>Attachments: </label>
-                    <br/>
-                </a>
-                <ul>
-                    <li ng-repeat="attachment in announcement_attachment">
-                        <a href="{{attachment.attURL}}" style="color: blue" target="_self" download="{{attachment.attNAME}}" ng-bind="attachment.NAME"></a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-    
     <!-- Modal -->
     <div class="modal fade" id="newAnnouncementModal" tabindex="-1" role="dialog" aria-labelledby="newAnnouncementModalLabel">
         <div class="modal-dialog" role="document">
@@ -87,7 +107,7 @@
                         </div>
                         <div class="form-group">
                             <label for="announcement-file" class="control-label">Choose a file to upload</label>
-                            <input type="file" class="filestyle" data-icon="false" id="announcement-file" class="custom-file-input">                        
+                            <input type="file" class="filestyle" data-icon="false" id="announcement-file" class="custom-file-input">
                         </div>
                     </form>
                 </div>
