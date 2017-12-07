@@ -33,7 +33,6 @@ module.exports = function(app) {
             res.send({});
         } else {
             dao.query(sql, params, function(data) {
-                console.log(data)
                 res.json(data);
             })
         }
@@ -62,6 +61,24 @@ module.exports = function(app) {
 
             dao.query(sql, params, function(data) {
                 res.json(data);
+            })
+        }
+
+    });
+
+    app.post('/api/admin/announcement/delete', function(req, res) {
+        if (req.body.announcement_id == null) {
+            res.send({});
+        } else {
+            var sql = 'DELETE FROM announcement_attachment WHERE ANNOUNCEMENT_ID = ?; '
+            var params = [req.body.announcement_id];
+
+            dao.query(sql, params, function(data) {
+                sql = 'DELETE FROM announcement WHERE ANNOUNCEMENT_ID = ?; '
+                params = [req.body.announcement_id];
+                dao.query(sql, params, function() {
+                    res.send(true)
+                })
             })
         }
 

@@ -107,6 +107,13 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
         })
     }
 
+    $scope.deleteAnnoucement = function(announcement_id) {
+        if (confirm("Are you sure ?"))
+        AdminAnnouncement.deleteAnnouncement(announcement_id).then(function(data1) {
+            loadData();
+        });
+    }
+
     $scope.maxheight = window.innerHeight - 140 + "px";
     loadData();
 });

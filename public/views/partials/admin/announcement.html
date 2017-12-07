@@ -27,16 +27,16 @@
                         <i class="fa fa-bullhorn bg-blue"></i>
                         <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i> <span ng-bind="time.date |  date: 'HH:mm'"></span></span>
-                            <h3 class="timeline-header"><a href="#"><span ng-bind="announcement.NAME"></span></a> posted an announcement</h3>
+                            <h3 class="timeline-header"><a href="#"><span ng-bind="announcement.NAME"></span></a> posted an announcement #{{announcement.ANNOUNCEMENT_ID}}</h3>
                             <div class="timeline-body">
-                                <h4 ng-bind="announcement.TITLE"></h4>
+                                <h4 ng-bind="announcement.TITLE"></h4> 
                                 <span ng-bind="announcement.CONTENT" class="demo-detail"> </span>
                             </div>
                             <div class="timeline-footer">
                                 <a class="btn btn-primary btn-xs" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">Read more</a>
                                 <a class="btn btn-success btn-xs" ng-if="isTeacher" data-toggle="modal" data-target="#newAnnouncementModal"
                                 ng-click="editAnnoucement(announcement.ANNOUNCEMENT_ID)">Edit</a>
-                                <a class="btn btn-danger btn-xs" ng-if="isTeacher">Delete</a>
+                                <a class="btn btn-danger btn-xs" ng-if="isTeacher" ng-click="deleteAnnoucement(announcement.ANNOUNCEMENT_ID)">Delete</a>
                             </div>
                         </div>
                     </li>
