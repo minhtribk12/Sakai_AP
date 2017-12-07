@@ -3,7 +3,7 @@ var dao = require(__base + 'app/dao');
 module.exports = function(app) {
 
     app.post('/api/admin/announcement', function(req, res) {
-        var sql = 'SELECT * FROM announcement a LEFT JOIN users u on u.users_id = a.users_id WHERE a.course_class_id = ?';
+        var sql = 'SELECT * FROM announcement a LEFT JOIN users u on u.users_id = a.users_id WHERE a.course_class_id = ? ORDER BY DATE_CREATED DESC';
         var params = [req.body.cid];
 
         if (req.body.cid == null) {
@@ -72,20 +72,63 @@ module.exports = function(app) {
         var sql;
 
         if (req.body.fileUpdated.ANNOUNCEMENT_ID != null) {
-            params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.CONTENT, req.body.fileUpdated.ANNOUNCEMENT_ID];
-            sql = 'UPDATE announcement SET title = ?, content = ? WHERE announcement_id = ?';
+
+            sql = "DELETE FROM announcement_attachment WHERE ANNOUNCEMENT_ID = ? ; "
+            params = [req.body.fileUpdated.ANNOUNCEMENT_ID];
+
+            dao.query(sql, params, function(data) {
+                params = [req.body.fileUpdated.TITLE, req.body.fileUpdated.CONTENT, req.body.fileUpdated.ANNOUNCEMENT_ID];
+                sql = 'UPDATE announcement SET title = ?, content = ?  WHERE ANNOUNCEMENT_ID = ? ; ';
+                dao.query(sql, params, function(data) {
+                    var resources = req.body.fileUpdated.resources;
+                    sql = '';
+                    params = [];
+                    if (resources) {
+                        resources.map(function(resource) {
+                            sql += "INSERT INTO announcement_attachment (ANNOUNCEMENT_ID, ATTACHMENT_ID, ATTACHMENT_DESCRIPTION) VALUES (? , ?, ?); "
+                            params.push(req.body.fileUpdated.ANNOUNCEMENT_ID);
+                            params.push(resource.ATTACHMENT_ID);
+                            params.push(resource.DESCRIPTION);
+                        })
+                    }
+                    dao.query(sql, params, function(data) {
+                        if (data != null || data != undefined) {
+                            res.send(true);
+                        } else {
+                            res.send(false);
+                        }
+                    })
+                })
+
+            })
         } else {
             params = [req.body.fileUpdated.COURSE_CLASS_ID, req.body.user.users_id, req.body.fileUpdated.TITLE, req.body.fileUpdated.CONTENT];
             sql = 'INSERT INTO announcement(course_class_id, users_id, title, content, date_created) VALUES(?, ?, ?, ?, NOW())';
-            //TODO: upload files, create attachments
-        }
 
-        dao.query(sql, params, function(data) {
-            if (data != null) {
-                res.send(true);
-            } else {
-                res.send(false);
-            }
-        })
+            dao.query(sql, params, function(data) {
+
+                params = [];
+                sql = '';
+                var resources = req.body.fileUpdated.resources;
+                if (resources) {
+                    resources.map(function(resource) {
+                        sql += "INSERT INTO announcement_attachment (ANNOUNCEMENT_ID, ATTACHMENT_ID, ATTACHMENT_DESCRIPTION) VALUES (? , ?, ?); "
+                        params.push(data.insertId);
+                        params.push(resource.ATTACHMENT_ID);
+                        params.push(resource.DESCRIPTION);
+                    })
+                }
+
+
+                dao.query(sql, params, function(data) {
+                    if (data != null || data != undefined) {
+                        res.send(true);
+                    } else {
+                        res.send(false);
+                    }
+                })
+            });
+
+        }
     });
 }

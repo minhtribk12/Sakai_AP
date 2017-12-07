@@ -15,11 +15,7 @@
     <div class="main-content">
         <div class="row">
             <div class="col-xs-12 col-md-{{announcement_detail == null ? '12' : '4'}} max-height-full scroll">
-<<<<<<< HEAD
-                <button type="button" ng-if="isTeacher" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal" style="float:right">
-=======
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal">
->>>>>>> d603174eb31eb81e761aa8c3c99d67adac84edc5
+                <button type="button" ng-if="isTeacher" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal" ng-click="initNewAnnouncement()" style="float:right">
                     <span class="glyphicon glyphicon-plus"></span> Add
                 </button>
                 <!-- The time line -->
@@ -34,11 +30,12 @@
                             <h3 class="timeline-header"><a href="#"><span ng-bind="announcement.NAME"></span></a> posted an announcement</h3>
                             <div class="timeline-body">
                                 <h4 ng-bind="announcement.TITLE"></h4>
-                                <span ng-bind="announcement_detail.CONTENT" class="demo-detail"> </span>
+                                <span ng-bind="announcement.CONTENT" class="demo-detail"> </span>
                             </div>
                             <div class="timeline-footer">
                                 <a class="btn btn-primary btn-xs" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">Read more</a>
-                                <a class="btn btn-success btn-xs" ng-if="isTeacher">Edit</a>
+                                <a class="btn btn-success btn-xs" ng-if="isTeacher" data-toggle="modal" data-target="#newAnnouncementModal"
+                                ng-click="editAnnoucement(announcement.ANNOUNCEMENT_ID)">Edit</a>
                                 <a class="btn btn-danger btn-xs" ng-if="isTeacher">Delete</a>
                             </div>
                         </div>
@@ -111,7 +108,14 @@
                         </div>
                         <div class="form-group">
                             <label for="announcement-file" class="control-label">Choose a file to upload</label>
-                            <input type="file" class="filestyle" data-icon="false" id="announcement-file" class="custom-file-input">
+                            <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
+                            <div class="input-group" style="width: 100%;  margin-bottom: 3px;" ng-repeat="resource in announcement.resources">
+                                <input type="text" ng-model="resource.AttNAME" id="AttNAME" readonly="readonly" class="form-control" style="width: 36%">
+                                <input type="text" ng-model="resource.DESCRIPTION" id="DESCRIPTION" maxlength="64" placeholder="A sort desciprtion" class="form-control" style="width: 56%">
+                                <button class="btn btn-danger btn-md"><span class="glyphicon glyphicon-trash"></span></button>
+                                <input type="text" ng-model="resource.ATTACHMENT_ID" style="display: none;">
+                            </div>
+                            <button class="btn btn-primary btn-md" onclick="$('#myfile').click()" style="float: right;"><span class="glyphicon glyphicon-cloud-upload"></span> Upload file</button>
                         </div>
                     </form>
                 </div>
