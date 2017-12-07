@@ -4,7 +4,7 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
 	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
     $scope.course_name = cdata.course_name;
     
-	function getAnnouncementDetail() {
+    function getAnnouncementDetail() {
 		cdata = $cookieStore.get('cdata');
 		AdminAnnouncement.getAnnouncementDetail(cdata.announcement_id).then(function(data){
 			$scope.announcement_detail = data[0];
@@ -55,6 +55,7 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
                     alert('Failed to create the resource!');
                 }
             }
+            loadData();
         })
     }
 

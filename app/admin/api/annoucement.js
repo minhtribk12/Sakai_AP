@@ -15,6 +15,30 @@ module.exports = function(app) {
         }
     });
 
+    app.post('/api/admin/announcement/recent', function(req, res) {
+        var sql = `SELECT a.COURSE_CLASS_ID, c.TITLE AS CLASS_NAME, a.ANNOUNCEMENT_ID, a.CONTENT, a.DATE_CREATED, a.TITLE, u.NAME AS AUTHOR_NAME
+            FROM announcement a 
+            LEFT JOIN users u ON a.users_id = u.users_id 
+            LEFT JOIN course_class cc ON cc.course_class_id = a.course_class_id 
+            LEFT JOIN course c ON cc.course_id = c.course_id  
+            WHERE a.course_class_id IN (
+                SELECT m.course_class_id 
+                FROM membership m 
+                WHERE m.users_id = ?) 
+            ORDER BY date_created 
+            DESC LIMIT 5;`
+        var params = [req.body.user_id];
+
+        if (req.body.user_id == null) {
+            res.send({});
+        } else {
+            dao.query(sql, params, function(data) {
+                console.log(data)
+                res.json(data);
+            })
+        }
+    });
+
     app.post('/api/admin/announcement/detail', function(req, res) {
         if (req.body.announcement_id == null) {
             res.send({});

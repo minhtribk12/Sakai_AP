@@ -1,3 +1,86 @@
-<div>
-	Nội dung gì đó sẽ để ở trang home
-</div>
+<section class="content" style="overflow: hidden;">
+
+	<div class="row" style="display: none">
+		<div class="col-md-12">
+			<div class="box box-solid">
+	            <!-- /.box-header -->
+	            <div class="box-body" style="text-align: center;">
+	              	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+	                	<div class="carousel-inner">
+			              	<div class="item">
+			                    <img src="http://placehold.it/1200x150/39CCCC/ffffff&amp;text=I+Love+Bootstrap" alt="First slide">
+							</div>
+			              	<div class="item">
+			                    <img src="http://placehold.it/1200x150/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" alt="Second slide">  
+			              	</div>
+							<div class="item active">
+								<img src="http://placehold.it/1200x150/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide">
+							</div>
+		                </div>
+					</div>
+	            </div>
+	       	</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+          	<div class="box box-solid">
+	            <div class="box-header with-border">
+	              <h3 class="box-title" style="font-weight: bold;">Recent announcements</h3>
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	              	<div class="box-group" id="accordion">
+	                	<div class="panel box box-success" ng-repeat="ann in recent_announcements">
+		                	<div class="box-header with-border">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ann.ANNOUNCEMENT_ID}}" class="collapsed" aria-expanded="false" onload="setAnnouncementId(ann.ANNOUNCEMENT_ID)">
+									<div class="user-block">
+										<img class="img-circle" src="images/teacher.png" alt="User Image">
+										<span class="username" ng-bind="ann.AUTHOR_NAME"></span>
+										<span class="description">Posted an announcement - {{ann.DATE_CREATED}}</span>
+										<span class="description pull-right" style="font-weight: bold" ng-bind="ann.CLASS_NAME"></span>
+									</div>
+
+								</a>
+		            		</div>
+		                  	
+		                  	<div id="collapse{{ann.ANNOUNCEMENT_ID}}" class="panel-collapse collapse" aria-expanded="false">
+
+			                    <div class="box-body">
+									<p ng-bind="ann.CONTENT"></p>
+									<p>...</p>
+			            		</div>
+							</div>
+		                </div>
+					</div>
+		        </div>
+		            <!-- /.box-body -->
+			</div>
+	          <!-- /.box -->
+		</div>
+
+
+		<div class="col-md-4">
+			<div class="box box-widget widget-user-2">
+	            <!-- Add the bg color to the header using any of the bg-* classes -->
+	            <div class="widget-user-header bg-yellow">
+					<div class="widget-user-image">
+						<img class="img-circle" src="images/user_admin.png" alt="User Avatar">
+					</div>
+	              <!-- /.widget-user-image -->
+	              <h3 class="widget-user-username" ng-bind="profile.name"></h3>
+	              <h5 class="widget-user-desc">Profiles</h5>
+	            </div>
+	            <div class="box-footer no-padding">
+	              	<ul class="nav nav-stacked">
+	              		<li><a href="#"><span class="profile-label" >Student ID </span><span class="pull-right" ng-bind="profile.id"></span></a></li>
+	                	<li><a href="#"><span class="profile-label">Email </span><span class="pull-right" ng-bind="profile.email"></span></a></li>
+	                	<li><a href="#"><span class="profile-label">Total courses </span><span class="pull-right badge bg-blue" ng-bind="profile.total_course"></span></a></li>
+	                	<li><a href="#"><span class="profile-label">On-going courses </span><span class="pull-right badge bg-green-active" ng-bind="profile.on_going_course"></span></a></li>
+	                	
+	              	</ul>
+	            </div>
+      		</div>
+		</div>
+
+	</section>
