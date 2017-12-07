@@ -22,10 +22,29 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
             $scope.course_name = cdata.course_name;
         }
 
+        AdminMain.getRecentAnnouncement(user.users_id).then(function(data) {
+            $scope.recent_announcements = data;
+        })
+
+
+        AdminMain.getProfile(user.users_id).then(function(data) {
+            $scope.profile = data[0];
+            console.log($scope.profile)
+        })
+
+        AdminMain.getOngoingCourse(user.users_id).then(function(data) {
+            $scope.profile.on_going_course = data.length;
+        })
+
         AdminMain.getCourses(user).then(function(data) {
             $scope.courses = data;
+            $scope.profile.total_course = data.length;
         })
+
+
     }
+
+    
 
     $scope.setCid = function(id, index, name) {
         var current_course_class = $cookieStore.get('cid');

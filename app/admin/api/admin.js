@@ -27,4 +27,19 @@ module.exports = function (app) {
         })
     });
     
+    app.post('/api/admin/ongoing', function (req, res) {
+        var sql = 'SELECT * FROM membership m LEFT JOIN course_class cc ON m.course_class_id = cc.course_class_id LEFT JOIN course c ON c.course_id = cc.course_id WHERE m.users_id = ? AND c.end_date > now() AND c.start_date < now();';
+        var params = [req.body.user_id];
+        dao.query(sql, params, function(data){
+            res.json(data);
+        })
+    });
+
+    app.post('/api/admin/profile', function (req, res) {
+        var sql = 'SELECT users_id as id, email, name FROM users WHERE users_id = ?';
+        var params = [req.body.user_id];
+        dao.query(sql, params, function(data){
+            res.json(data);
+        })
+    });
 };

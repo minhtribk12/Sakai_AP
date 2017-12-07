@@ -20,6 +20,22 @@ angular.module('AdminMainService', []).factory('AdminMain', ['$http', function($
 				}
 				return false;
 			})
+		}, 
+		getRecentAnnouncement: function(user_id) {
+			return $http.post('/api/admin/announcement/recent', {user_id: user_id}).then(function (result) {
+				return result.data;
+			})
+		}, 
+		getProfile: function(user_id) {
+			return $http.post('/api/admin/profile', {user_id: user_id}).then(function (result) {
+				return result.data;
+			})
+		},
+
+		getOngoingCourse: function(user_id) {
+			return $http.post('/api/admin/ongoing', {user_id: user_id}).then(function (result) {
+				return result.data;
+			})
 		}
 	};
 
