@@ -15,7 +15,7 @@
     <div class="main-content">
         <div class="row">
             <div class="col-xs-12 col-md-{{announcement_detail == null ? '12' : '4'}} max-height-full scroll">
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal" style="float:right">
+                <button type="button" ng-if="isTeacher" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAnnouncementModal" style="float:right">
                     <span class="glyphicon glyphicon-plus"></span> Add
                 </button>
                 <!-- The time line -->
@@ -34,8 +34,8 @@
                             </div>
                             <div class="timeline-footer">
                                 <a class="btn btn-primary btn-xs" ng-click="setAnnouncementId(announcement.ANNOUNCEMENT_ID)">Read more</a>
-                                <a class="btn btn-success btn-xs">Edit</a>
-                                <a class="btn btn-danger btn-xs">Delete</a>
+                                <a class="btn btn-success btn-xs" ng-if="isTeacher">Edit</a>
+                                <a class="btn btn-danger btn-xs" ng-if="isTeacher">Delete</a>
                             </div>
                         </div>
                     </li>

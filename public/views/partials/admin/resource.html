@@ -8,7 +8,7 @@
     <div class="main-content">
         <input type="file" id="myfile" onchange="angular.element(this).scope().loadedfile()" style="display: none;">
         <div class="row" style="padding-right: 30px">
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;">
+            <button type="button" class="btn btn-success btn-sm" ng-if="isTeacher" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right;">
                 <span class="glyphicon glyphicon-plus"></span> Add
             </button>
         </div>
@@ -19,7 +19,7 @@
                     <div class="info-box-content">
                         
                         <a href="{{file.attURL}}" target="_self" class="btn btn-effets btn-primary btn-xs pull-right" style="margin-left: 3px;" download="{{file.attNAME}}"><span class="glyphicon glyphicon-download-alt" ></span></a>
-                        <button type="button" class="btn btn-success btn-xs pull-right" ng-click="editResource(file.RESOURCES_ID)" ng-if="editting == ''">
+                        <button type="button" class="btn btn-success btn-xs pull-right" ng-click="editResource(file.RESOURCES_ID)" ng-if="isTeacher" ng-if="editting == ''">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
                         <button type="button" style="margin-left: 3px;" class="btn btn-success btn-xs pull-right" ng-click="updateResource(file)" ng-if="file.RESOURCES_ID == editting">

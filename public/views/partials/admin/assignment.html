@@ -2,21 +2,16 @@
     <section class="content-header" style="margin-bottom: 10px;">
         <h1>
         {{course_name}}
+        <small>Assigment</small>
       </h1>
     </section>
     <div class="main-content">
         <div class="row">
             <div class="col-xs-12">
+                <button ng-if="isTeacher" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAssignmentModal" style="float:right">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </button>
                 <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Assigment</h3>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newAssignmentModal" style="float:right">
-                                <span class="glyphicon glyphicon-plus"></span> Add
-                            </button>
-
-                    </div>
-                    <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody>
@@ -47,10 +42,10 @@
     </div>
     <div class="box-footer no-padding" style="position: relative;">
         <div style="position: absolute; right: 10px; top: 10px;z-index: 1" ng-if="assignment_detail != null">
-            <button type="button" class="btn btn-success btn-sm" ng-click="editAssignment(assignment_detail, assignment_attachment)" data-toggle="modal" data-target="#newAssignmentModal">
+            <button type="button" ng-if="isTeacher" class="btn btn-success btn-sm" ng-click="editAssignment(assignment_detail, assignment_attachment)" data-toggle="modal" data-target="#newAssignmentModal">
                 <span class="glyphicon glyphicon-edit"></span>
             </button>
-            <button type="button" class="btn btn-danger btn-sm">
+            <button type="button" ng-if="isTeacher" class="btn btn-danger btn-sm">
                 <span class="glyphicon glyphicon-trash"></span>
             </button>
         </div>

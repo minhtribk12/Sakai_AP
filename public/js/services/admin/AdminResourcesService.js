@@ -27,6 +27,15 @@ angular.module('AdminResourcesService', []).factory('AdminResources', ['$http', 
 			return $http.put('/api/admin/resource/new', param).then(function (result) {
 				return result.data;
 			})
+		},
+
+		isTeacher: function(user_id, course_id) {
+			return $http.post('/api/admin/courses/teacher', {user_id: user_id, course_id: course_id}).then(function (result) {
+				if (result.data != null && result.data.length > 0) {
+					return true
+				}
+				return false;
+			})
 		}
 	};
 

@@ -4,6 +4,10 @@ angular.module('adminAnnouncementController', []).controller('AdminAnnouncementC
 	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
     $scope.course_name = cdata.course_name;
     
+    AdminAnnouncement.isTeacher(user.users_id, cdata.cid).then(function(res){
+        $scope.isTeacher = res;
+    })
+
 	function getAnnouncementDetail() {
 		cdata = $cookieStore.get('cdata');
 		AdminAnnouncement.getAnnouncementDetail(cdata.announcement_id).then(function(data){

@@ -4,6 +4,11 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
     var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null };
     $scope.course_name = cdata.course_name;
 
+
+    AdminAssignment.isTeacher(user.users_id, cdata.cid).then(function(res){
+        $scope.isTeacher = res;
+    })
+
     function getAssignmentDetail() {
         cdata = $cookieStore.get('cdata');
         AdminAssignment.getAssignmentDetail(cdata.assignment_id).then(function(data) {

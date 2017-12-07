@@ -5,6 +5,15 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
     $scope.jsonExcel = null;
     $scope.sheet = {};
     $scope.course_name = cdata.course_name;
+    var colorMap = ["#c0392b", "#c0392b","#e74c3c","#d35400","#e67e22","#f39c12","#f1c40f","#1abc9c","#16a085","#2ecc71","#27ae60"];
+
+    $scope.getColor = function (i) {
+        return colorMap[(i - 1) %10];
+    }
+
+    AdminGradeBook.isTeacher(user.users_id, cdata.cid).then(function(res){
+        $scope.isTeacher = res;
+    })
 
     AdminGradeBook.getGradebook(cdata.cid, user.users_id).then(function(data) {
         $scope.gradebooks = data;

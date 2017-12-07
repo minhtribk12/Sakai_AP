@@ -10,16 +10,16 @@
 
     </section>
     <!-- Student view -->
-    <div class="main-content">
+    <div class="main-content" ng-if="!isTeacher">
         <div class="row" style="margin-top: 40px">
             <div class="col-xs-6 col-md-3 text-center" ng-repeat="gradebook in gradebooks" on-finish-render="ngRepeatFinished" title="{{gradebook.NOTE}}">
-                <input type="text" class="knob" value="{{gradebook.GRADE * 10}}" data-skin="tron" data-thickness="0.2" data-width="180" data-height="180" data-fgColor="#3c8dbc" data-readonly="true">
+                <input type="text" class="knob" value="{{gradebook.GRADE * 10}}" data-skin="tron" data-thickness="0.2" data-width="180" data-height="180" data-fgColor="{{getColor(gradebook.GRADE)}}" data-readonly="true">
                 <div class="knob-label" ng-bind="gradebook.TITLE"></div>
             </div>
         </div>
     </div>
     <!-- Admin view -->
-    <div class="row">
+    <div class="row" ng-if="isTeacher">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -45,7 +45,7 @@
             <!-- /.box -->
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="isTeacher">
         <div class="col-xs-12">
             <div class="box">
                 <!-- /.box-header -->
