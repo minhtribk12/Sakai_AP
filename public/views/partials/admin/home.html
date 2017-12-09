@@ -29,22 +29,22 @@
 	              <h3 class="box-title" style="font-weight: bold;">Recent announcements</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
+	            <div class="box-body" ng-init="reading = ''">
 	              	<div class="box-group" id="accordion">
 	                	<div class="panel box box-success" ng-repeat="ann in recent_announcements">
 		                	<div class="box-header with-border">
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ann.ANNOUNCEMENT_ID}}" class="collapsed" aria-expanded="false" onload="setAnnouncementId(ann.ANNOUNCEMENT_ID)">
+								<a data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;" class="collapsed" aria-expanded="false" ng-click="setAnnouncementId(ann.ANNOUNCEMENT_ID);reading == '' ? reading = ann.ANNOUNCEMENT_ID : reading = ''">
 									<div class="user-block">
 										<img class="img-circle" src="images/teacher.png" alt="User Image">
 										<span class="username" ng-bind="ann.AUTHOR_NAME"></span>
-										<span class="description">Posted an announcement - {{ann.DATE_CREATED}}</span>
+										<span class="description" title="{{ann.DATE_CREATED | date: 'dd/MM/yyyy  HH:mm:ss'}}">Posted an announcement - {{ann.DATE_CREATED | date: 'dd/MM/yyyy'}}</span>
 										<span class="description pull-right" style="font-weight: bold" ng-bind="ann.CLASS_NAME"></span>
 									</div>
 
 								</a>
 		            		</div>
 		                  	
-		                  	<div id="collapse{{ann.ANNOUNCEMENT_ID}}" class="panel-collapse collapse" aria-expanded="false">
+		                  	<div id="collapse{{ann.ANNOUNCEMENT_ID}}" class="panel-collapse collapse {{ann.ANNOUNCEMENT_ID == reading ? 'in' : ''}}" aria-expanded="false">
 
 			                    <div class="box-body">
 									<p ng-bind="ann.CONTENT"></p>

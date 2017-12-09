@@ -47,11 +47,11 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="sakai" class="logo">
+            <a href="sakai" class="logo" href="/sakai">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>LT</span>
+                <span class="logo-mini"><b>Sakai</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Admin</b>LTE</span>
+                <span class="logo-lg"><b>Sakai</b> CSE</span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -114,8 +114,13 @@
                             <li><a href="/sakai/discussion" id="menu{{course.COURSE_CLASS_ID}}-3" ng-click="setCid(course.COURSE_CLASS_ID, 3, course.TITLE)">Discussion</a></li>                            
                         </ul>
                     </li>
-
-                    
+                    <li class="header">Action</li>
+                    <li class="treeview">
+                         <a ng-click="logout()" style="cursor: pointer;">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <span>Log out</span>
+                        </a>
+                    </li>
                 </ul>
             <!-- </div> -->
             </section>
