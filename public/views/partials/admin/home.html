@@ -31,7 +31,7 @@
 	            <!-- /.box-header -->
 	            <div class="box-body" ng-init="reading = ''">
 	              	<div class="box-group" id="accordion">
-	                	<div class="panel box box-success" ng-repeat="ann in recent_announcements">
+	                	<div class="panel box box-primary" ng-repeat="ann in recent_announcements">
 		                	<div class="box-header with-border">
 								<a data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;" class="collapsed" aria-expanded="false" ng-click="setAnnouncementId(ann.ANNOUNCEMENT_ID);reading == '' ? reading = ann.ANNOUNCEMENT_ID : reading = ''">
 									<div class="user-block">

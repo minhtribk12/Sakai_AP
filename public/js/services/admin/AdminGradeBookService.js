@@ -30,6 +30,16 @@ angular.module('AdminGradeBookService', []).factory('AdminGradeBook', ['$http', 
 				}
 				return false;
 			})
+		},
+		getGradebookItem: function(gradebook_item_id) {
+			return $http.post('/api/admin/gradebook/item/id', {gradebook_item_id: gradebook_item_id}).then(function (result) {
+				return result.data;
+			})
+		}, 
+		addGradeItem: function(gradebook_item_title, course_class_id) {
+			return $http.put('/api/admin/gradebook/item/add', {gradebook_item_title: gradebook_item_title, course_class_id:course_class_id}).then(function (result) {
+				return result.data;
+			})
 		}
 	};
 

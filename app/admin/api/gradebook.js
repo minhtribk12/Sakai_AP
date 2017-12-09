@@ -16,7 +16,21 @@ module.exports = function(app) {
 
     });
 
-    // TODO: insert to db
+    app.post('/api/admin/gradebook/item/id', function(req, res) {
+        if (req.body.gradebook_item_id == null) {
+            res.send({});
+        } else {
+            var sql = 'SELECT * FROM gradebook_item WHERE gradebook_item_id = ?';
+            var params = [req.body.gradebook_item_id];
+
+            dao.query(sql, params, function(data) {
+                console.log(data)
+                res.send(data[0]);
+            });
+        }
+        
+    });
+    
     app.put('/api/admin/gradebook', function(req, res) {
         var list_point = req.body.listpoint;
         var user = req.body.user;
@@ -61,6 +75,21 @@ module.exports = function(app) {
 
             dao.query(sql, params, function(data) {
                 res.json(data);
+            })
+        }
+
+    });
+
+    app.put('/api/admin/gradebook/item/add', function(req, res) {
+        console.log(req.body.gradebook_item_title)
+        if (req.body.course_class_id == null || req.body.gradebook_item_title.TITLE == null) {
+            res.send(false);
+        } else {
+            var sql = 'INSERT INTO gradebook_item(title, course_class_id, is_released) VALUES(?, ?, 1)';
+            var params = [req.body.gradebook_item_title.TITLE, req.body.course_class_id];
+
+            dao.query(sql, params, function(data) {
+                res.json(true);
             })
         }
 

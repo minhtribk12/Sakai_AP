@@ -21,13 +21,21 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
     })
 
     /////////////////////////////////////////////////////////////For teachers
-    AdminGradeBook.getGradebookItems(cdata.cid).then(function(data) {
-        $scope.gradebook_items = data;
-        getGradebookItemDetail();
-    })
+    function loadGradebookItems() {
+        AdminGradeBook.getGradebookItems(cdata.cid).then(function(data) {
+            $scope.gradebook_items = data;
+        })
+    }
 
+    loadGradebookItems();
+    
     $scope.setGradebookItemId = function (id) {
         $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': cdata.discussion_id, 'gradebook_item_id': id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher});
+        
+        AdminGradeBook.getGradebookItem(id).then(function(data) {
+            $scope.chosen_gradebook_item = data;
+        })
+
         getGradebookItemDetail();
     }
 
@@ -42,6 +50,16 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
        drawChart();
     });
 
+    $scope.addGradeItem = function (title) {
+        cdata = $cookieStore.get('cdata');
+        AdminGradeBook.addGradeItem(title, cdata.cid).then(function(data){
+            if (!data) {
+                alert("Failed to create new item!");
+            } else {
+                loadGradebookItems();
+            }
+        })
+    }
     /////////////////////////////////////////////////////////////
 
 

@@ -33,11 +33,17 @@ module.exports = function(app) {
     });
 
     app.post('/api/admin/resource/delete', function(req, res) {
-        var params = [req.body.resId];
-        var sql = 'DELETE FROM resources WHERE RESOURCES_ID = ?';
 
-        dao.query(sql, params, function(data){ // uncomment it
-            res.send(true); //mean: delete success
-        })
+        if (req.body.resId != null) {
+            var params = [req.body.resId.RESOURCES_ID];
+            var sql = 'DELETE FROM resources WHERE resources_id = ?';
+
+            dao.query(sql, params, function(data){ // uncomment it
+                res.send(true); //mean: delete success
+            })
+        } else {
+            res.send(false);
+        }
+        
     });
 }

@@ -36,6 +36,7 @@ angular.module('adminResourcesController', []).controller('AdminResourcesControl
             loadData();
         })
     }
+    
     $scope.deleteResource = function(id) {
         if (confirm('Are you sure ? ')) {
             AdminResources.deleteResources(id, user).then(function(data) {
