@@ -18,8 +18,38 @@ module.exports = function(app) {
 
     // TODO: insert to db
     app.put('/api/admin/gradebook', function(req, res) {
-        console.log(req.body)
-       res.send(false);
+        var list_point = req.body.listpoint;
+        var user = req.body.user;
+        var cdata = req.body.cdata;
+
+        if (list_point == null || user == null || cdata == null) {
+            res.send(false);
+        } else {
+            
+            for (i = 0; i < list_point.length; i++) { 
+                var grade = list_point[i];
+                var sql = 'SELECT * FROM gradebook WHERE users_id = ? AND gradebook_item_id = ?';
+                var params = [grade.USERS_ID, cdata.gradebook_item_id];
+
+                dao.query(sql, params, function(data) {
+                    if (data.length == 0) {
+                        sql = 'INSERT INTO gradebook(gradebook_item_id, users_id, grade, note) VALUES(?, ?, ?, ?)';
+                        params = [cdata.gradebook_item_id, grade.USERS_ID, grade.GRADE, grade.NOTE];
+
+                    } else {
+                        sql = 'UPDATE gradebook SET grade = ?, note = ? WHERE gradebook_item_id = ? AND users_id = ?';
+                        params = [grade.GRADE, grade.NOTE,  cdata.gradebook_item_id, grade.USERS_ID];
+                    }
+
+                    dao.query(sql, params, function(data) {
+                        
+                    })
+                })
+
+            }
+            res.send(true);
+        }
+        
     });
 
     app.post('/api/admin/gradebook/item', function(req, res) {
