@@ -97,16 +97,16 @@
                 </div>
                 <ul class="sidebar-menu tree" data-widget="tree">
                     <li class="header">COURSES</li>
-
+                    <input type="text" ng-model='cid' id="cid" style="display: none;">
                     <li ng-repeat="course in courses" class="treeview" ng-init="course.temp.e = false" >
                         <a ng-click="course.temp.e = !course.temp.e ;" style="cursor: pointer;" id="menu{{course.COURSE_CLASS_ID}}" ng-click="setCid(course.COURSE_CLASS_ID, -1, course.TITLE)">
                             <i class="fa fa-book"></i>
                             <span ng-bind="course.TITLE"></span>
                             <span class="pull-right-container">
-                                <i class="fa {{ course.temp.e || cid == course.COURSE_CLASS_ID ? 'fa-angle-left' : 'fa-angle-down'}} pull-right"></i>
+                                <i class="fa fa-angle-down pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu {{course.temp.e || cid == course.COURSE_CLASS_ID ? 'in' : ''}}">
+                        <ul class="treeview-menu">
                             <li><a href="/sakai/announcement" id="menu{{course.COURSE_CLASS_ID}}-4" ng-click="setCid(course.COURSE_CLASS_ID, 4, course.TITLE)">Announcement</a></li>
                             <li><a href="/sakai/resource" id="menu{{course.COURSE_CLASS_ID}}-0" ng-click="setCid(course.COURSE_CLASS_ID, 0, course.TITLE)">Resource</a></li>
                             <li><a href="/sakai/gradebook" id="menu{{course.COURSE_CLASS_ID}}-1" ng-click="setCid(course.COURSE_CLASS_ID, 1, course.TITLE)">GradeBook</a></li>
@@ -196,6 +196,19 @@
     <script type="text/javascript">
         $(function(){
             drawChart();
+            cid = $('#cid').val();
+            count = 10;
+            var myInterval = setInterval(function(){ 
+                cid = $('#cid').val(); 
+                if (cid != undefined || cid != null) {
+                    clearInterval(myInterval);
+                    $('#menu' + cid).click();
+                }
+
+                if (--count < 0) {
+                    clearInterval(myInterval);
+                }
+            }, 100);
         })
     </script>
 

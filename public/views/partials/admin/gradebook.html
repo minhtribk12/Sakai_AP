@@ -3,7 +3,7 @@
         <h1>
         {{course_name}}
         <small>Gradebook</small>
-         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right; padding-bottom: 10px">
+         <button ng-if="isTeacher" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right; padding-bottom: 10px">
             <span class="glyphicon glyphicon-plus"></span> Add
         </button>
       </h1>
