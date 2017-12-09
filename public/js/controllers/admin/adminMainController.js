@@ -44,8 +44,6 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
 
     }
 
-    
-
     $scope.setCid = function(id, index, name) {
         var current_course_class = $cookieStore.get('cid');
 

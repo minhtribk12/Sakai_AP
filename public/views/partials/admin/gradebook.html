@@ -19,8 +19,8 @@
         </div>
     </div>
     <!-- Admin view -->
-    <div class="row" ng-if="isTeacher">
-        <div class="col-xs-12">
+    <div class="row" ng-if="isTeacher" style="margin-top: 35px;">
+        <div class="col-xs-12 col-md-4">
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Gradebook items</h3>
@@ -29,7 +29,7 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tbody>
-                            <tr ng-repeat="item in gradebook_items" ng-click="setGradebookItemId(item.GRADEBOOK_ITEM_ID)">
+                            <tr ng-repeat="item in gradebook_items" style="cursor: pointer;" ng-click="setGradebookItemId(item.GRADEBOOK_ITEM_ID)">
                                 <td style="font-weight: bold;" ng-bind="item.TITLE"></td>
                             </tr>
                         </tbody>
@@ -44,9 +44,8 @@
             </div>
             <!-- /.box -->
         </div>
-    </div>
-    <div class="row" ng-if="isTeacher">
-        <div class="col-xs-12">
+
+        <div class="col-xs-12 col-md-8">
             <div class="box">
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">

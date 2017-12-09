@@ -108,13 +108,16 @@ module.exports = function(app) {
                             params.push(resource.DESCRIPTION);
                         })
                     }
-                    dao.query(sql, params, function(data) {
-                        if (data != null || data != undefined) {
-                            res.send(true);
-                        } else {
-                            res.send(false);
-                        }
-                    })
+
+                    if (sql == '') { res.send(true); } else {
+                        dao.query(sql, params, function(data) {
+                            if (data != null || data != undefined) {
+                                res.send(true);
+                            } else {
+                                res.send(false);
+                            }
+                        })
+                    }
                 })
 
             })
@@ -136,14 +139,15 @@ module.exports = function(app) {
                     })
                 }
 
-
-                dao.query(sql, params, function(data) {
-                    if (data != null || data != undefined) {
-                        res.send(true);
-                    } else {
-                        res.send(false);
-                    }
-                })
+                if (sql == '') { res.send(true); } else {
+                    dao.query(sql, params, function(data) {
+                        if (data != null || data != undefined) {
+                            res.send(true);
+                        } else {
+                            res.send(false);
+                        }
+                    })
+                }
             });
 
         }

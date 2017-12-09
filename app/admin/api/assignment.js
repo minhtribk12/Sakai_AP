@@ -57,6 +57,38 @@ module.exports = function(app) {
 
     });
 
+    app.put('/api/admin/assignment/submission', function(req, res) {
+        var sql = 'INSERT INTO submission(ASSIGNMENT_ID ,USERS_ID ,CONTENT, date_created) VALUES (? , ? , ?, NOW())';
+        var params = [req.body.assignment_id, req.body.user.users_id, req.body.submit.CONTENT];
+
+        dao.query(sql, params, function(data) {
+            params = [];
+            sql = '';
+            var resources = req.body.submit.resources;
+            if (resources) {
+                resources.map(function(resource) {
+                    sql += "INSERT INTO submission_attachment (SUBMISSION_ID, ATTACHMENT_ID, ATTACHMENT_DESCRIPTION) VALUES (? , ?, ?); "
+                    params.push(data.insertId);
+                    params.push(resource.ATTACHMENT_ID);
+                    params.push(resource.DESCRIPTION);
+                })
+            }
+
+            if (sql == '') {
+                res.send(true);
+            } else {
+                dao.query(sql, params, function(data) {
+                    if (data != null || data != undefined) {
+                        res.send(true);
+                    } else {
+                        res.send(false);
+                    }
+                })
+            }
+        });
+
+    });
+
     app.post('/api/admin/assignment/submission/attachment', function(req, res) {
         if (req.body.assignment_id == null || req.body.user_id == null) {
             res.send({});
@@ -101,13 +133,15 @@ module.exports = function(app) {
                             params.push(resource.DESCRIPTION);
                         })
                     }
-                    dao.query(sql, params, function(data) {
-                        if (data != null || data != undefined) {
-                            res.send(true);
-                        } else {
-                            res.send(false);
-                        }
-                    })
+                    if (sql == '') { res.send(true); } else {
+                        dao.query(sql, params, function(data) {
+                            if (data != null || data != undefined) {
+                                res.send(true);
+                            } else {
+                                res.send(false);
+                            }
+                        })
+                    }
                 })
 
             })
@@ -129,14 +163,15 @@ module.exports = function(app) {
                     })
                 }
 
-
-                dao.query(sql, params, function(data) {
-                    if (data != null || data != undefined) {
-                        res.send(true);
-                    } else {
-                        res.send(false);
-                    }
-                })
+                if (sql == '') { res.send(true); } else {
+                    dao.query(sql, params, function(data) {
+                        if (data != null || data != undefined) {
+                            res.send(true);
+                        } else {
+                            res.send(false);
+                        }
+                    })
+                }
             });
         }
 

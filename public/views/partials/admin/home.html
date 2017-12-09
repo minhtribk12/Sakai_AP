@@ -44,7 +44,7 @@
 								</a>
 		            		</div>
 		                  	
-		                  	<div id="collapse{{ann.ANNOUNCEMENT_ID}}" class="panel-collapse collapse {{ann.ANNOUNCEMENT_ID == reading ? 'in' : ''}}" aria-expanded="false">
+		                  	<div id="collapse{{ann.ANNOUNCEMENT_ID}}" class="panel-collapse collapse " ng-class="ann.ANNOUNCEMENT_ID == reading ? 'in' : ''" aria-expanded="false">
 
 			                    <div class="box-body">
 									<p ng-bind="ann.CONTENT"></p>

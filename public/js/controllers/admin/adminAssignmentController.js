@@ -5,7 +5,7 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
     $scope.course_name = cdata.course_name;
 
 
-    AdminAssignment.isTeacher(user.users_id, cdata.cid).then(function(res){
+    AdminAssignment.isTeacher(user.users_id, cdata.cid).then(function(res) {
         $scope.isTeacher = res;
     })
 
@@ -59,11 +59,11 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
     }
 
     $scope.editAssignment = function(assignment, attachfiles) {
-    	getAssignmentDetail();
+        getAssignmentDetail();
         $scope.assignment = assignment;
         $scope.assignment.resources = [];
         for (var i = attachfiles.length - 1; i >= 0; i--) {
-            $scope.assignment.resources.push({AttNAME: attachfiles[i].NAME, DESCRIPTION: attachfiles[i].ATTACHMENT_DESCRIPTION, ATTACHMENT_ID: attachfiles[i].ATTACHMENT_ID });
+            $scope.assignment.resources.push({ AttNAME: attachfiles[i].NAME, DESCRIPTION: attachfiles[i].ATTACHMENT_DESCRIPTION, ATTACHMENT_ID: attachfiles[i].ATTACHMENT_ID });
         }
     }
 
@@ -97,5 +97,50 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
                 $scope.$apply();
             }
         });
+    }
+
+    $scope.initNewSubmit = function() {
+        $scope.submit = {};
+        $scope.submit.resources = [];
+    }
+
+    $scope.uploadedSubmmission = function() {
+        var data = new FormData();
+        jQuery.each(jQuery('#myfilesubmit')[0].files, function(i, file) {
+            data.append('file-' + i, file);
+        });
+
+        jQuery.ajax({
+            url: '/fastFileUpload',
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            success: function(data) {
+                $scope.submit.resources.push({ AttNAME: data.originalname, ATTACHMENT_ID: data.insertId });
+                $('#myfilesubmit').val(null);
+                $scope.$apply();
+            }
+        });
+    }
+
+    $scope.submissions = function() {
+        AdminAssignment.submissions($scope.submit, user, cdata.assignment_id).then(function(){
+            getAssignmentDetail()
+        })
+    }
+
+
+    $scope.close = function() {
+        $scope.assignment_detail = null;
+    }
+
+    $scope.deleteSubmitAtt = function(index) {
+        $scope.submit.resources.splice(index, 1);
+    }
+
+    $scope.deleteAssAtt = function(index) {
+        $scope.assignment.resources.splice(index, 1);
     }
 });
