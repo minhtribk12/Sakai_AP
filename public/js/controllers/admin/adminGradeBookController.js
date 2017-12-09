@@ -2,6 +2,7 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
 
     var user = $cookieStore.get('user') || null;
     var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
+    
     $scope.jsonExcel = null;
     $scope.sheet = {};
     $scope.course_name = cdata.course_name;
@@ -65,6 +66,12 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
     		$scope.jsonExcel = null;
     		$scope.sheet = {};
     		$('#xlfile').val(null);
+
+            if (data) {
+                alert("Imported successfully.");
+            } else {
+                alert("Imported failed.");
+            }
     	})
     }
 
