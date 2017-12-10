@@ -4,13 +4,15 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 	var cdata = $cookieStore.get('cdata') || { 'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': false};
     $scope.course_name = cdata.course_name;
 
-	AdminDiscussion.getDiscussion(cdata.cid, user).then(function(data){
-		$scope.discussions = data;
-		getDiscussionDetail();
-	})
+    function loadDiscussion() {
+        AdminDiscussion.getDiscussion(cdata.cid, user).then(function(data){
+            $scope.discussions = data;
+            getDiscussionDetail();
+        })
+    }
 
+    loadDiscussion();
     $scope.reading = '';
-
 	function getDiscussionDetail() {
 		cdata = $cookieStore.get('cdata');
 		AdminDiscussion.getDiscussionDetail(cdata.discussion_id).then(function(data){
@@ -27,21 +29,22 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
     $scope.addDiscussion = function(file) {
         file.COURSE_CLASS_ID = cdata.cid;
         AdminDiscussion.addDiscussion(file, user).then(function(data) {
-        	if (data) {
-                alert('Created successfully!');
-            } else {
+        	if (!data) {
                 alert('Failed to create the discussion!');
+            } else {
+                loadDiscussion();
             }
         })
     }
 
     $scope.addComment = function(file) {
-        file.COURSE_CLASS_ID = cdata.cid;
-        AdminDiscussion.addComment(file, user).then(function(data) {
-        	if (data) {
-                alert('Created successfully!');
-            } else {
+        file.DISCUSSION_ID = cdata.discussion_id;
+        AdminDiscussion.addMessage(file, user).then(function(data) {
+        	if (!data) {
                 alert('Failed to create a comment!');
+            } else {
+                file.CONTENT = "";
+                getDiscussionDetail();
             }
         })
     }
