@@ -14,11 +14,11 @@
                       <h3 class="box-title" style="font-weight: bold;">All discussions</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body" ng-init="reading = ''">
+                    <div class="box-body">
                         <div class="box-group" id="accordion">
                             <div class="panel box box-primary" ng-repeat="discussion in discussions">
                                 <div class="box-header with-border">
-                                    <a data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;" class="collapsed" aria-expanded="false" ng-click="setDiscussionId(discussion.DISCUSSION_ID, discussion.TOPIC);reading == '' ? reading = discussion.DISCUSSION_ID : reading = ''">
+                                    <a data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;" class="collapsed" aria-expanded="false" ng-click="setDiscussionId(discussion.DISCUSSION_ID, discussion.TOPIC);">
                                         <div class="user-block">
                                             <img class="img-circle" src="images/discussion.png" alt="User Image">
                                             <span class="username" ng-bind="discussion.TOPIC"></span>

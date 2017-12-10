@@ -9,6 +9,8 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 		getDiscussionDetail();
 	})
 
+    $scope.reading = '';
+
 	function getDiscussionDetail() {
 		cdata = $cookieStore.get('cdata');
 		AdminDiscussion.getDiscussionDetail(cdata.discussion_id).then(function(data){
@@ -17,6 +19,7 @@ angular.module('adminDiscussionController', []).controller('AdminDiscussionContr
 	}
 
 	$scope.setDiscussionId = function (id, topic) {
+        $scope.reading = id;
         $cookieStore.put('cdata', {'cid': cdata.cid, 'announcement_id': id, 'assignment_id': cdata.assignment_id, 'discussion_id': id, 'gradebook_item_id': cdata.gradebook_item_id, 'menu_index': cdata.menu_index, 'course_name': cdata.course_name, 'is_teacher': cdata.is_teacher});
 		getDiscussionDetail();
     }

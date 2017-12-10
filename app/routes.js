@@ -40,7 +40,8 @@ module.exports = function (app) {
   });
   
   app.get('*', function (req, res) {
-    res.sendFile(__base + './public/views/index.html');
+    //res.sendFile(__base + './public/views/index.html');
+    res.redirect('/sakai')
   });
 
 }
