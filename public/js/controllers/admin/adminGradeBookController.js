@@ -60,6 +60,18 @@ angular.module('adminGradeBookController', []).controller('AdminGradeBookControl
             }
         })
     }
+
+    $scope.deleteGradeItem = function (gradebook_item_id) {
+        if (confirm('Are you sure ? ')) {
+            AdminGradeBook.deleteGradebookItem(gradebook_item_id).then(function(data){
+                if (!data) {
+                    alert("Failed to detele the item!");
+                } else {
+                    loadGradebookItems();
+                }
+            })
+        }        
+    }
     /////////////////////////////////////////////////////////////
 
 

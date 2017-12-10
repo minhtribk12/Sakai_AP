@@ -42,7 +42,7 @@
                                 <td style="font-weight: bold;" ng-bind="item.TITLE"></td>
                                 <td>
                                     <button title="Delete" type="button" class="btn btn-danger btn-sm" style="float: right;">
-                                        <span class="glyphicon glyphicon-trash"></span>
+                                        <span class="glyphicon glyphicon-trash" ng-click="deleteGradeItem(item.GRADEBOOK_ITEM_ID)"></span>
                                     </button>
                                     <button title="Import" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" ng-click="resource = {}" style="float: right; margin-right: 5px">
                                         <span class="glyphicon glyphicon-import"></span>

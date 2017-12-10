@@ -66,6 +66,33 @@ module.exports = function(app) {
         
     });
 
+    app.put('/api/admin/gradebook/item/delete', function(req, res) {
+        if (req.body.gradebook_item_id == null) {
+            res.send(false);
+        } else {
+            var sql = 'DELETE FROM gradebook WHERE gradebook_item_id = ?';
+            var params = [req.body.gradebook_item_id];
+
+            dao.query(sql, params, function(data) {
+                sql = 'DELETE FROM gradebook_item WHERE gradebook_item_id = ?';
+
+                if (data == null) {
+                    res.send(false);
+                } else {
+                    dao.query(sql, params, function(data) {
+                        if (data == null) {
+                            res.send(false);
+                        } else {
+                            res.send(true);
+                        }
+                    })
+                }               
+            
+            })
+        }
+        
+    });
+
     app.post('/api/admin/gradebook/item', function(req, res) {
         if (req.body.cid == null) {
             res.send({});

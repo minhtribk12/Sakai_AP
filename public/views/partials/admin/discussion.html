@@ -11,7 +11,10 @@
             <div class="col-md-12">
                 <div class="box box-solid">
                     <div class="box-header with-border">
-                      <h3 class="box-title" style="font-weight: bold;">All discussions</h3>
+                        <h3 class="box-title" style="font-weight: bold;">All discussions</h3>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newDiscussionModal" style="float:right">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -22,7 +25,7 @@
                                         <div class="user-block">
                                             <img class="img-circle" src="images/discussion.png" alt="User Image">
                                             <span class="username" ng-bind="discussion.TOPIC"></span>
-                                            <span class="description" title="{{ann.DATE_CREATED | date: 'dd/MM/yyyy  HH:mm:ss'}}">Created by {{discussion.NAME}} - {{discussion.DATE_CREATED | date: 'dd/MM/yyyy'}}</span>
+                                            <span class="description" title="{{ann.DATE_CREATED | date: 'dd/MM/yyyy  HH:mm:'}}">Created by {{discussion.NAME}} - {{discussion.DATE_CREATED | date: 'dd/MM/yyyy HH:mm'}}</span>
                                             
                                         </div>
 
@@ -33,6 +36,11 @@
 
                                     <div class="box box-widget">
                                         <div class="box-footer box-comments">
+                                            <div class="box-comment" ng-if="messages.length == 0">
+                                                
+                                                    No message available.
+                                                
+                                            </div>
                                             <div class="box-comment" ng-repeat="message in messages">
                                                     <!-- User imagese -->
                                                 <img class="img-circle img-sm" src="images/user_admin.png" alt="User Image">
@@ -48,11 +56,11 @@
                                             </div>
                                         </div>
                                         <div class="box-footer">
-                                            <form action="#" method="post">
+                                            <form ng-submit="addComment(file)">
                                                 <img class="img-responsive img-circle img-sm" src="images/user_admin.png" alt="Alt Text">
                                                 <!-- .img-push is used to add margin to elements next to floating images -->
                                                 <div class="img-push">
-                                                    <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                    <input type="text" class="form-control input-sm" placeholder="Press enter to post comment" ng-model="file.CONTENT">
                                                 </div>
                                             </form>
                                         </div>
@@ -67,7 +75,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="newDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="newDiscussionModalLabel">
         <div class="modal-dialog" role="document">
