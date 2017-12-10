@@ -40,9 +40,14 @@
             <div class="col-md-8 col-xs-12" style="{{assignment_detail == null ? 'display: none' : '';}}">
                 <div class="box-footer no-padding" style="position: relative;">
                     <div style="position: absolute; right: 10px; top: 10px;z-index: 1" >
+                        <button type="button" ng-if="isTeacher" class="btn btn-primary btn-sm" ng-click="getsubmitList(assignment_detail)" data-toggle="modal"  data-target="#submitList">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                        </button>
+                        
                         <button type="button" ng-if="isTeacher" class="btn btn-success btn-sm" ng-click="editAssignment(assignment_detail, assignment_attachment)" data-toggle="modal" data-target="#newAssignmentModal">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
+
                         <button type="button" ng-if="isTeacher" class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
@@ -237,6 +242,48 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submissions()" ng-if="submit.CONTENT != CONTENT">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="submitList" tabindex="-1" role="dialog" aria-labelledby="submitListModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="newAnnouncementModalLabel" style="font-weight: bold;">List of submission</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Submit date</th>
+                                    <th>Note</th>
+                                    <th>Attach</th>
+                                </tr>
+                                <tr ng-repeat="submit in submits" style="cursor: pointer;">
+                                    <td ng-bind="submit.NAME"></td>
+                                    <td ng-bind="submit.CONTENT"></td>
+                                    <td ng-bind="submit.DATE_CREATED | date: 'dd/MM/yyyy'" title="{{submit.DATE_CREATED | date: 'dd/MM/yyyy  HH:mm:ss'}}"></td>
+                                    <td>
+                                       <ul>
+                                           <li class="triangle" ng-repeat="att in submit.attachment">
+                                                    <a ref="{{att.attURL}}" style="color: blue" target="_self" download="{{att.NAME}}">
+                                                     <span class="info-box-text" style="padding-left: 5px;display: inline-block;" ng-bind="att.NAME"></span>
+                                                </a>
+                                           </li>
+                                       </ul> 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

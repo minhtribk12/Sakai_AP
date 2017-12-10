@@ -144,4 +144,27 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
     $scope.deleteAssAtt = function(index) {
         $scope.assignment.resources.splice(index, 1);
     }
+
+    $scope.getsubmitList = function(assignment) {
+        AdminAssignment.getsubmitList(assignment).then(function(results){
+            console.log(results)
+            temp = {};
+            results.map(function(result){
+                if (!temp[result.submission_id]) {
+                    temp[result.submission_id] = {attachment: []};
+                    temp[result.submission_id].NAME = result.user_name;
+                    temp[result.submission_id].CONTENT = result.submission_content;
+                    temp[result.submission_id].DATE_CREATED = result.submit_date;
+                }
+
+                temp[result.submission_id].attachment.push({attURL: result.attachment_url, NAME: result.attachment_name})
+            })
+
+            $scope.submits = [];
+            for(key in temp) {
+                $scope.submits.push(temp[key]);
+            }
+
+        })
+    }
 });

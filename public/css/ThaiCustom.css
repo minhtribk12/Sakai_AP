@@ -50,3 +50,29 @@
 .profile-label, .knob-label {
     font-weight: bold;
 }
+
+li.triangle {
+    position:relative;
+    width:20%;
+    list-style-type: none;
+    text-transform: uppercase;
+    font-family: Arial;
+    font-size: .875em;
+    line-height: 1.75em;
+    }
+li.triangle::before{
+    position:absolute;
+    content:"";
+    top:50%;
+    -webkit-transform:translateY(-50%);
+    -moz-transform:translateY(-50%);
+    -o-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    transform:translateY(-50%);
+    margin-left:-10px;
+    width: 0; 
+    height: 0; 
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid #367fa9;
+    }

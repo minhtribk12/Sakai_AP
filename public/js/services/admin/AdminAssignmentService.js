@@ -48,6 +48,12 @@ angular.module('AdminAssignmentService', []).factory('AdminAssignment', ['$http'
 				return result.data;
 			})
 		},
+		getsubmitList: function(assignment) {
+			var param = {assignment: assignment};
+			return $http.post('/api/admin/assignment/listsubmission', param).then(function (result) {
+				return result.data;
+			})
+		},
 
 		isTeacher: function(user_id, course_id) {
 			return $http.post('/api/admin/courses/teacher', {user_id: user_id, course_id: course_id}).then(function (result) {

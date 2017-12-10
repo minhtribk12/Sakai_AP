@@ -103,6 +103,26 @@ module.exports = function(app) {
 
     });
 
+    app.post('/api/admin/assignment/listsubmission', function(req, res) {
+
+        var sql = ' SELECT r.submission_id, u.name as user_name, r.content as submission_content, a.name as attachment_name, a.url as attachment_url, MaxTime as submit_date '
+                + ' FROM ('
+                + ' SELECT assignment_id, content, submission_id, users_id, MAX(date_created) as MaxTime'
+                + ' FROM submission'
+                + ' GROUP BY users_id'
+                + ' ) r'
+                + ' INNER JOIN users u ON u.users_id = r.users_id'
+                + ' LEFT JOIN submission_attachment sa ON sa.submission_id = r.submission_id'
+                + ' LEFT JOIN attachment a ON a.attachment_id = sa.attachment_id'
+                + ' WHERE r.assignment_id =  ?'
+        var params = [req.body.assignment.ASSIGNMENT_ID];
+
+        dao.query(sql, params, function(data) {
+            res.json(data);
+        })
+
+    });
+
     app.put('/api/admin/assignment/update', function(req, res) {
         var params;
         var sql;
