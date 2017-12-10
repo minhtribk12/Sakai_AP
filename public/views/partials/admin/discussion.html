@@ -7,70 +7,64 @@
     </section>
 
     <div class="main-content">
-
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Discussions</h3>
-                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newDiscussionModal" style="float:right">
-                            <span class="glyphicon glyphicon-plus"></span> Add
-                        </button>
+            <div class="col-md-12">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title" style="font-weight: bold;">All discussions</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <th>Topic</th>
-                                    <th>Created by</th>
-                                    <th>Date</th>
-                                </tr>
-                                <tr ng-repeat="discussion in discussions" ng-click="setDiscussionId(discussion.DISCUSSION_ID, discussion.TOPIC)">
-                                    <td ng-bind="discussion.TOPIC"></td>
-                                    <td ng-bind="discussion.NAME"></td>
-                                    <td ng-bind="discussion.DATE_CREATED"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            <!-- /.box -->
-            </div>
-        </div>
-    </div>
-    <div class="box box-widget">
-        <div class="box-header with-border">
-            <div class="user-block">
-                <img class="img-circle" src="images/user_admin.png" alt="User Image">
-                <span class="username"><a href="#">Topic</a></span>
-                <span class="description">Created by Chau - 7:30 PM Today</span>
-            </div>
-        </div>
-        <div class="box-footer box-comments">
-            <div class="box-comment" ng-repeat="message in messages">
-                    <!-- User imagese -->
-                <img class="img-circle img-sm" src="images/user_admin.png" alt="User Image">
+                    <div class="box-body" ng-init="reading = ''">
+                        <div class="box-group" id="accordion">
+                            <div class="panel box box-primary" ng-repeat="discussion in discussions">
+                                <div class="box-header with-border">
+                                    <a data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;" class="collapsed" aria-expanded="false" ng-click="setDiscussionId(discussion.DISCUSSION_ID, discussion.TOPIC);reading == '' ? reading = discussion.DISCUSSION_ID : reading = ''">
+                                        <div class="user-block">
+                                            <img class="img-circle" src="images/discussion.png" alt="User Image">
+                                            <span class="username" ng-bind="discussion.TOPIC"></span>
+                                            <span class="description" title="{{ann.DATE_CREATED | date: 'dd/MM/yyyy  HH:mm:ss'}}">Created by {{discussion.NAME}} - {{discussion.DATE_CREATED | date: 'dd/MM/yyyy'}}</span>
+                                            
+                                        </div>
 
-                <div class="comment-text">
-                    <span class="username">
-                        <span ng-bind="message.NAME"></span>
-                        <span class="text-muted pull-right" ng-bind="message.DATE_CREATED | date: 'dd/MM/yyyy HH:ss'"></span>
-                    </span><!-- /.username -->
-                    <span ng-bind="message.CONTENT"></span>
+                                    </a>
+                                </div>
+                                
+                                <div id="collapse{{discussion.DISCUSSION_ID}}" class="panel-collapse collapse " ng-class="discussion.DISCUSSION_ID == reading ? 'in' : ''" aria-expanded="false">
+
+                                    <div class="box box-widget">
+                                        <div class="box-footer box-comments">
+                                            <div class="box-comment" ng-repeat="message in messages">
+                                                    <!-- User imagese -->
+                                                <img class="img-circle img-sm" src="images/user_admin.png" alt="User Image">
+
+                                                <div class="comment-text">
+                                                    <span class="username">
+                                                        <span ng-bind="message.NAME"></span>
+                                                        <span class="text-muted pull-right" ng-bind="message.DATE_CREATED | date: 'dd/MM/yyyy HH:ss'"></span>
+                                                    </span><!-- /.username -->
+                                                    <span ng-bind="message.CONTENT"></span>
+                                                </div>
+                                                    <!-- /.comment-text -->
+                                            </div>
+                                        </div>
+                                        <div class="box-footer">
+                                            <form action="#" method="post">
+                                                <img class="img-responsive img-circle img-sm" src="images/user_admin.png" alt="Alt Text">
+                                                <!-- .img-push is used to add margin to elements next to floating images -->
+                                                <div class="img-push">
+                                                    <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- /.box-body -->
                 </div>
-                    <!-- /.comment-text -->
+                  <!-- /.box -->
             </div>
-        </div>
-        <div class="box-footer">
-            <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="images/user_admin.png" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
-                <div class="img-push">
-                    <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                </div>
-            </form>
         </div>
     </div>
 
