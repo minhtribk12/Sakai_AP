@@ -29,17 +29,26 @@ angular.module('adminMainController', ['ckeditor']).controller('AdminMainControl
 
         AdminMain.getProfile(user.users_id).then(function(data) {
             $scope.profile = data[0];
-            console.log($scope.profile)
         })
 
         AdminMain.getOngoingCourse(user.users_id).then(function(data) {
-            $scope.profile.on_going_course = data.length;
+            if ($scope.profile != null) {
+                $scope.profile.on_going_course = data.length;
+            }
+            
         })
 
         AdminMain.getCourses(user).then(function(data) {
             $scope.courses = data;
-            $scope.profile.total_course = data.length;
+
+            if ($scope.profile != null) {
+                $scope.profile.total_course = data.length;
+            }
+            
         })
+
+        $cookieStore.remove('cdata');
+        $cookieStore.put('cdata', {'cid': null, 'announcement_id': null, 'assignment_id': null, 'discussion_id': null, 'gradebook_item_id': null, 'menu_index': null, 'course_name': null, 'is_teacher': cdata.is_teacher});
 
 
     }

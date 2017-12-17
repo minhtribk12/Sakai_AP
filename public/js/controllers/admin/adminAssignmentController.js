@@ -12,7 +12,6 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
     function getAssignmentDetail() {
         cdata = $cookieStore.get('cdata');
         AdminAssignment.getAssignmentDetail(cdata.assignment_id).then(function(data) {
-            console.log(data)
             $scope.assignment_detail = data[0];
         })
         AdminAssignment.getAssignmentAttachments(cdata.assignment_id).then(function(data) {
@@ -20,6 +19,7 @@ angular.module('adminAssignmentController', []).controller('AdminAssignmentContr
         })
         AdminAssignment.getSubmissions(cdata.assignment_id, user.users_id).then(function(data) {
             $scope.submission = data[0];
+
         })
 
         AdminAssignment.getSubmissionAttachments(cdata.assignment_id, user.users_id).then(function(data) {
